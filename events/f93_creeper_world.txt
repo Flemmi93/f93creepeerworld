@@ -1,0 +1,107 @@
+namespace = f93creeper_world
+
+
+planet_event = {
+	id = f93creeper_world.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_planet_flag = creeper_present
+		set_planet_entity = {
+			entity = infected_planet_01_stage_2_entity
+		}
+	}
+}
+
+planet_event = {
+	id = f93creeper_world.2
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		remove_planet_flag = creeper_present
+		switch = {
+			trigger = is_planet_class
+			pc_savannah = { set_planet_entity = { entity = pc_savannah } }
+			pc_desert = { set_planet_entity = { entity = pc_desert } }
+			pc_tropical = { set_planet_entity = { entity = pc_tropical } }
+			pc_arid = { set_planet_entity = { entity = pc_arid } }
+			pc_continental = { set_planet_entity = { entity = pc_continental } }
+			pc_ocean = { set_planet_entity = { entity = pc_ocean } }
+			pc_tundra = { set_planet_entity = { entity = pc_tundra } }
+			pc_arctic = { set_planet_entity = { entity = pc_arctic } }
+			pc_alpine = { set_planet_entity = { entity = pc_alpine } }
+			pc_savannah = { set_planet_entity = { entity = pc_savannah } }
+			pc_gaia = { set_planet_entity = { entity = pc_gaia } }
+			pc_city = { set_planet_entity = { entity = pc_city } }
+			pc_relic = { set_planet_entity = { entity = pc_relic } }
+			pc_nuked = { set_planet_entity = { entity = pc_nuked } }
+			pc_hive = { set_planet_entity = { entity = pc_hive } }
+			pc_machine = { set_planet_entity = { entity = pc_machine } }
+			pc_molten = { set_planet_entity = { entity = molten_planet } }
+			pc_barren = { set_planet_entity = { entity = barren_planet } }
+			pc_barren_cold = { set_planet_entity = { entity = cold_barren_planet } }
+			pc_toxic = { set_planet_entity = { entity = toxic_planet } }
+			pc_frozen = { set_planet_entity = { entity = frozen_planet } }
+		}
+	}
+}
+
+#seeds the Creeper
+country_event = { 
+	id = f93creeper_world.3
+	hide_window = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		random_system = {
+			limit = {
+				NOR = {
+					any_system_planet = { is_homeworld = yes }
+					any_neighbor_system = {
+						any_system_planet = { is_homeworld = yes }
+					}
+				}
+			}
+			random_system_planet = {
+				planet_event = { id = f93creeper_world.1 }
+			}
+			system_event = { id = f93creeper_world.4 days = 30 random = 30 } 
+		}
+	}
+}
+
+system_event = {
+	id = f93creeper_world.4
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		any_system_planet = {
+			NOT = { has_planet_flag = creeper_present }
+			creeper_can_land = yes	
+		}
+	}
+	immediate = {
+		random_system_planet = {
+			limit = {
+				NOT = { has_planet_flag = creeper_present }
+				creeper_can_land = yes	
+			}
+			planet_event = { id = f93creeper_world.1 }
+			solar_system = { system_event = { id = f93creeper_world.4 days = 30 random = 30 } }
+		}
+	}
+}
+
+planet_event = {
+	id = f93creeper_world.5
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		solar_system = { system_event = { id = f93creeper_world.4 } }
+	}
+}

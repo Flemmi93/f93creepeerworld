@@ -1,0 +1,11 @@
+creeper_can_land = {
+	OR = {
+		habitable_planet = yes
+		uninhabitable_regular_planet = yes
+		is_planet_class = pc_city
+		is_planet_class = pc_relic
+		is_planet_class = pc_nuked
+		is_planet_class = pc_hive
+		is_planet_class = pc_machine
+	}
+}

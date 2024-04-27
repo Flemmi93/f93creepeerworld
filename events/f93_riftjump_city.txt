@@ -1,0 +1,126 @@
+namespace = riftjump_city
+
+#normale RiftJump traveling via decision
+planet_event = {
+	id = riftjump_city.1
+	is_triggered_only = yes
+
+	title = riftjump_city.1.name
+	desc = riftjump_city.1.desc
+	picture = GFX_evt_news_room
+	immediate = {
+		save_event_target_as = riftjump_origin
+		#each random_system has fewer and fewer requirements, there should always be a viable path, landing in home systems or near them is the lowest priority
+		random_system = {
+			limit = {
+				NOR = {
+					owner = { has_country_flag = just_moved }
+					exists = owner
+					any_fleet_in_system = {
+						owner = {
+							is_hostile = root.owner
+						}
+					}
+					any_system_planet = { is_homeworld = yes }
+					any_neighbor_system = {
+						any_system_planet = { is_homeworld = yes }
+					}
+				}
+				any_system_planet = { habitable_planet_not_urban = yes }
+			}
+			random_system_planet = {
+				limit = { habitable_planet_not_urban = yes }
+				save_event_target_as = riftjump_target
+			}
+			owner = { set_country_flag = just_moved }
+		}
+		random_system = {
+			limit = {
+				NOR = {
+					owner = { has_country_flag = just_moved }
+					exists = owner
+					any_system_planet = { is_homeworld = yes }
+					any_neighbor_system = {
+						any_system_planet = { is_homeworld = yes }
+					}
+				}
+				any_system_planet = { habitable_planet_not_urban = yes }
+			}
+			random_system_planet = {
+				limit = { habitable_planet_not_urban = yes }
+				save_event_target_as = riftjump_target
+			}
+			owner = { set_country_flag = just_moved }
+		}
+		random_system = {
+			limit = {
+				NOR = {
+					owner = { has_country_flag = just_moved }
+					exists = owner
+					any_system_planet = { is_homeworld = yes }
+				}
+				any_system_planet = { habitable_planet_not_urban = yes }
+			}
+			random_system_planet = {
+				limit = { habitable_planet_not_urban = yes }
+				save_event_target_as = riftjump_target
+			}
+			owner = { set_country_flag = just_moved }
+		}
+		random_system = {
+			limit = {
+				NOR = {
+					owner = { has_country_flag = just_moved }
+					exists = owner
+				}
+				any_system_planet = { habitable_planet_not_urban = yes }
+			}
+			random_system_planet = {
+				limit = { habitable_planet_not_urban = yes }
+				save_event_target_as = riftjump_target
+			}
+			owner = { set_country_flag = just_moved }
+		}
+	}
+	option = {
+		name = riftjump_city.1.a
+		hidden_effect = { owner = { remove_country_flag = just_moved } }
+	}
+
+	after = {
+		event_target:riftjump_target = {
+			create_colony = {
+				owner = root
+				species = root.owner_main_species
+				ethos = owner
+			}
+			solar_system = {
+				create_starbase = {
+					owner = root
+					size = starbase_starport
+					module = shipyard
+				}
+			}
+		}
+		every_owned_pop = {
+			resettle_pop = {
+				pop = this
+				planet = event_target:riftjump_target
+			}
+		}
+		hidden_effect = {
+			event_target:riftjump_target = { random_owned_pop = { kill_pop = yes } }
+			event_target:riftjump_target = { validate_planet_buildings_and_districts = yes }
+			create_country = {
+				name = random
+				type = default
+				auto_delete = no
+				effect = { save_event_target_as = riftjump_cleanup }
+			}
+			solar_system = { starbase = { save_event_target_as = starbase_origin_system } }
+			event_target:starbase_origin_system = { set_starbase_size = starbase_outpost }
+			event_target:starbase_origin_system = { set_owner = event_target:riftjump_cleanup }
+			event_target:riftjump_cleanup = { destroy_country = yes }
+		}
+	}
+}

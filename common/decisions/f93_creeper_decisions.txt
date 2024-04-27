@@ -1,0 +1,82 @@
+riftjump_decision_creation = {
+	owned_planets_only = yes
+	icon = default
+	resources = {
+		category = decisions
+		cost = {
+			energy = 1000
+			#creeper_artifacts = 1
+			influence = 100
+		}
+	}
+
+	prerequisites = {
+		"tech_riftjump_city"
+	}
+	
+	enactment_time = 360
+
+	effect = { 
+		custom_tooltip = riftjump_city_created_desc
+		hidden_effect = {
+			owner = { set_country_flag = riftjump_city_created }
+		}
+	}
+
+	ai_weight = {
+		weight = 1
+		modifier = {
+			factor = 10
+			owner = { has_country_flag = creeper_spotted }
+		}
+		modifier = {
+			factor = 10
+			owner = { has_country_flag = creeper_invasion }
+		}
+		modifier = {
+			factor = 10
+			years_passed > 10
+		}
+	}
+}
+
+riftjump_decision = {
+	owned_planets_only = yes
+	icon = default
+	resources = {
+		category = decision
+		cost = {
+			energy = 1000
+			#creeper_artifacts = 1
+		}
+	}
+	prerequisites = {
+		"tech_riftjump_city"
+	}
+
+	potential = {
+		owner = {
+			OR = {
+				has_country_flag = creeper_spotted
+				has_country_flag = creeper_invasion
+				has_country_flag = riftjump_city_created
+				has_technology = tech_riftjump_city
+			}
+		}
+	}
+
+	allow = {
+		owner = { has_country_flag = riftjump_city_created }
+	}
+
+	effect = { planet_event = { id = riftjump_city.1 } }
+
+	
+	ai_weight = {
+		weight = 1
+		modifier = {
+			factor = 100
+			owner = { has_country_flag = creeper_invasion }
+		}
+	}
+}
