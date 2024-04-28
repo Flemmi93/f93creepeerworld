@@ -74,7 +74,7 @@ country_event = {
 				planet_event = { id = f93creeper_world.1 }
 			}
 			system_event = { id = f93creeper_world.4 days = 30 random = 30 } 
-			set_name = INFECTED
+			set_name = INFECTED #for test purpose, to see the change more easly
 		}
 	}
 }
@@ -96,10 +96,10 @@ system_event = {
 			use_bypasses = no
 			min_steps = 1
 			max_steps = 2
-			limit = { NOT = { has_star_flag = creeper_present_in_system } any_system_planet = { creeper_can_land = yes }}
+			limit = { NOT = { has_star_flag = creeper_present_in_system } any_system_planet = { creeper_can_land = yes } }
 			set_star_flag = creeper_present_in_system
 			system_event = { id = f93creeper_world.4 days = 120 random = 60 }
-			set_name = INFECTED
+			set_name = INFECTED #for test purpose, to see the change more easly
 		}
 		random_system_planet = {
 			limit = {
@@ -114,13 +114,9 @@ system_event = {
 
 country_event = {
 	id = f93creeper_world.5
-	#hide_window = yes
+	hide_window = yes
 	is_triggered_only = yes
-	picture = GFX_evt_news_room
 
-	title = "its here"
-	desc = "what now?"
-	
 	trigger = {
 		any_system = {
 			has_star_flag = creeper_present_in_system
@@ -131,24 +127,99 @@ country_event = {
 	immediate = {
 		set_country_flag = creeper_spotted
 	}
-	option = {
+}
 
+planet_event = {
+	id = f93creeper_world.6
+	hide_window = yes
+	is_triggered_only = yes
+	pre_triggers = {
+		has_owner = yes
+	}
+	trigger = {
+		has_planet_flag = creeper_present
+	}
+	immediate = {
+		set_planet_flag = creeper_invasion
+		random_list = {
+			50 = {
+				while = {
+					count = 2
+					create_army = {
+						name = Creeper
+						owner = event_target:creeper_country
+						type = creeper_army
+					}
+				}
+			}
+			20 = {
+				while = {
+					count = 6
+					create_army = {
+						name = Creeper
+						owner = event_target:creeper_country
+						type = creeper_army
+					}
+				}
+			}
+			12 = {
+				while = {
+					count = 2
+					create_army = {
+						name = Creeper
+						owner = event_target:creeper_country
+						type = creeper_spore
+					}
+				}
+			}
+		}
 	}
 }
 
 country_event = {
-	id = f93creeper_world.6
+	id = f93creeper_world.7
+	hide_window = yes
 	is_triggered_only = yes
-	picture = GFX_evt_news_room
-	
-	title = "its over"
-	desc = "what now?"
+	fire_only_once = yes
 	trigger = {
-		NOT = { has_country_flag = creeper_spread_phase }
+		NOT = { any_country = { has_country_flag = creeper_spread_phase } }
 	}
 	immediate = {
-	}
-	option = {
-
+		random_system = {
+			limit = {
+				any_system_planet = {
+					creeper_can_land = yes
+				}
+			}
+			create_country = {
+				name = "The Creeper"
+				adjective = "Creeper"
+				contact_rule = always
+				type = gray_goo
+				auto_delete = no
+				name_list = graygoo
+				flag = {
+					icon= {
+						category = "special"
+						file = "gray_goo.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "sinus.dds"
+					}
+					colors={
+						"blue"
+						"dark_blue"
+						"null"
+						"null"
+					}
+				}
+				effect = {
+					country_event = { id = f93creeper_world.3 }
+					save_global_event_target_as = creeper_country
+				}
+			}
+		}
+		every_country = { establish_communications_no_message = event_target:creeper_country }
 	}
 }

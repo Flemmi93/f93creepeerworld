@@ -19,5 +19,9 @@
  riftjump_decision: "$riftjump_city.1.name$"
  riftjump_decision_desc: "We activate the riftjump and leave §Y[Root.Planet.GetName]§! to places unknown"
 #Misc
- mod_job_angler_per_pop: "$mod_job_farmer_per_pop$"
+ mod_job_angler_per_pop: "§G+1§! $job_angler$ Job per $VALUE$ Pops"
+ mod_job_pearl_diver_per_pop: "§G+1§! $job_pearl_diver$ Job per $VALUE$ Pops"
  afg_demotion: ""
+#Armies
+ creeper_army: "Creeper Flow"
+ spore_army: "Creeper Spores"

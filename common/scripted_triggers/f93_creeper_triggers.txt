@@ -9,3 +9,10 @@ creeper_can_land = {
 		is_planet_class = pc_machine
 	}
 }
+
+is_creeper = {
+	OR = {
+		army_type = creeper_army
+		army_type = creeper_spore
+	}
+}

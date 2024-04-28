@@ -18,12 +18,11 @@ planet_event = {
 	immediate = {
 		save_event_target_as = riftjump_origin
 		solar_system = { set_star_flag = riftjump_city_origin_system }
-		#each random_system has fewer and fewer requirements, there should always be a viable path, landing in home systems or near them is the lowest priority
 		random_system = {
 			limit = {
 				NOR = {
 					has_star_flag = riftjump_city_origin_system
-					exists = owner
+					exists = owner 
 					has_star_flag = hostile_system
 					has_star_flag = guardian
 					has_star_flag = enclave
@@ -50,65 +49,7 @@ planet_event = {
 				save_event_target_as = riftjump_target
 			}
 		}
-		random_system = {
-			limit = {
-				NOR = {
-					has_star_flag = riftjump_city_origin_system
-					exists = owner
-					has_star_flag = hostile_system
-					has_star_flag = guardian
-					has_star_flag = enclave
-					has_star_flag = primitive_system
-					has_star_flag = lcluster
-					has_star_flag = sealed_system
-					any_system_planet = { is_homeworld = yes }
-					any_neighbor_system = {
-						any_system_planet = { is_homeworld = yes }
-					}
-				}
-				any_system_planet = {
-					habitable_planet_not_urban = yes
-					num_sapient_pops = 0
-				}
-			}
-			random_system_planet = {
-				limit = { habitable_planet_not_urban = yes }
-				save_event_target_as = riftjump_target
-			}
-		}
-		random_system = {
-			limit = {
-				NOR = {
-					has_star_flag = riftjump_city_origin_system
-					exists = owner
-					any_system_planet = { is_homeworld = yes }
-				}
-				any_system_planet = {
-					habitable_planet_not_urban = yes
-					num_sapient_pops = 0
-				}
-			}
-			random_system_planet = {
-				limit = { habitable_planet_not_urban = yes }
-				save_event_target_as = riftjump_target
-			}
-		}
-		random_system = {
-			limit = {
-				NOR = {
-					has_star_flag = riftjump_city_origin_system
-					exists = owner
-				}
-				any_system_planet = {
-					habitable_planet_not_urban = yes
-					num_sapient_pops = 0
-				}
-			}
-			random_system_planet = {
-				limit = { habitable_planet_not_urban = yes }
-				save_event_target_as = riftjump_target
-			}
-		}
+		owner = { remove_country_flag = riftjump_city_jumping }
 	}
 	option = {
 		name = riftjump_city.1.a
@@ -229,5 +170,53 @@ planet_event = {
 				solar_system = { remove_star_flag = riftjump_city_origin_system }
 			}
 		}
+	}
+}
+
+
+country_event = {
+	id = riftjump_city.2
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_ai = yes
+		has_technology = tech_riftjump_town
+		capital_scope = {
+			NOR = {
+				has_building = building_riftjump_town_main
+				has_building = building_riftjump_city_main
+			}
+		}
+	}
+
+	immediate = {
+		set_country_flag = riftjump_city_created
+		capital_scope = { add_building = building_riftjump_town_main }
+	}
+}
+
+country_event = {
+	id = riftjump_city.3
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_ai = yes
+		has_technology = tech_riftjump_town
+		NOT = { has_country_flag = riftjump_city_jumping }
+		capital_scope = {
+			OR = {
+				has_building = building_riftjump_town_main
+				has_building = building_riftjump_city_main
+			}
+			has_ground_combat = yes
+			any_ground_combat_attacker = {
+				is_creeper = yes
+			}
+		}
+	}
+
+	immediate = {
+		set_country_flag = riftjump_city_jumping
+		capital_scope = { planet_event = { id = riftjump_city.1 days = 30 random = 30 } }
 	}
 }

@@ -1,5 +1,9 @@
-on_monthly_pulse_country = {
+on_bi_yearly_pulse_country = {
 	events = {
 		f93creeper_world.5
+		f93creeper_world.6
+		f93creeper_world.7
+		riftjump_city.2
+		riftjump_city.3
 	}
 }

@@ -1,12 +1,15 @@
 riftjump_decision_creation_ai_techcheat = {
 	owned_planets_only = yes
 	icon = default
-	potential = { owner = { is_ai = yes } }
+	potential = {
+		owner = { is_ai = yes }
+		owner = { NOT = { has_technology = tech_riftjump_town } }
+	}
 
 	effect = { owner = { give_technology = { tech = tech_riftjump_town } } }
 	allow = { always = yes }
 	ai_weight = {
-		weight = 0
+		weight = 1
 		modifier = {
 			add = 100
 			owner = { has_country_flag = creeper_spotted }
@@ -19,13 +22,20 @@ riftjump_decision_creation_ai_techcheat = {
 }
 riftjump_decision_creation_ai = {
 	owned_planets_only = yes
+	potential = {
+		#owner = { is_ai = yes }
+		NOR = {
+			has_building = building_riftjump_town_main
+			has_building = building_riftjump_city_main
+		}
+	}
 	icon = default
 	resources = {
 		category = decisions
 		cost = {
-			energy = 1000
-			creeper_artifacts = 1
-			influence = 100
+			#alloys = 400
+			#creeper_artifacts = 1
+			#influence = 100
 		}
 	}
 
@@ -34,11 +44,12 @@ riftjump_decision_creation_ai = {
 	prerequisites = {
 		"tech_riftjump_town"
 	}
-
-	potential = { owner = { is_ai = yes } }
+ 	show_tech_unlock_if = {
+ 		always = no
+ 	}
 
 	allow = {
-		owner = { NOT = { has_country_flag = riftjump_city_created } }
+		always = yes
 	}
 
 	effect = { 
@@ -51,15 +62,15 @@ riftjump_decision_creation_ai = {
 	ai_weight = {
 		weight = 10
 		modifier = {
-			factor = 10
+			add = 90
 			owner = { has_country_flag = creeper_spotted }
 		}
 		modifier = {
-			factor = 10
-			owner = { has_country_flag = creeper_invasion }
+			add = 100
+			has_planet_flag = creeper_invasion
 		}
 		modifier = {
-			factor = 10
+			add = 100
 			years_passed > 10
 		}
 	}
@@ -71,12 +82,15 @@ riftjump_decision_creation_ai_upgrade = {
 	resources = {
 		category = decisions
 		cost = {
-			energy = 1000
-			creeper_artifacts = 1
-			influence = 100
+			alloys = 1000
+			#creeper_artifacts = 1
+			#influence = 100
 		}
 	}
 
+	show_tech_unlock_if = {
+		always = no
+	}
 	enactment_time = 360
 
 	prerequisites = {
@@ -86,7 +100,8 @@ riftjump_decision_creation_ai_upgrade = {
 	potential = { owner = { is_ai = yes } }
 
 	allow = {
-		owner = { NOT = { has_country_flag = riftjump_city_created } }
+		has_building = building_riftjump_town_main
+		NOT = { has_building = building_riftjump_city_main }
 	}
 
 	effect = { 
@@ -117,7 +132,6 @@ riftjump_decision = {
 		owner = {
 			OR = {
 				has_country_flag = creeper_spotted
-				has_country_flag = creeper_invasion
 				has_country_flag = riftjump_city_created
 				has_technology = tech_riftjump_town
 			}
@@ -137,10 +151,10 @@ riftjump_decision = {
 	}
 	
 	ai_weight = {
-		weight = 1
+		weight = 0
 		modifier = {
-			factor = 100
-			owner = { has_country_flag = creeper_invasion }
+			add = 200
+			has_ground_combat = yes
 		}
 	}
 }
