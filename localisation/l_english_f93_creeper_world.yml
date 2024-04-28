@@ -18,3 +18,6 @@
 #Decisions
  riftjump_decision: "$riftjump_city.1.name$"
  riftjump_decision_desc: "We activate the riftjump and leave §Y[Root.Planet.GetName]§! to places unknown"
+#Misc
+ mod_job_angler_per_pop: "$mod_job_farmer_per_pop$"
+ afg_demotion: ""

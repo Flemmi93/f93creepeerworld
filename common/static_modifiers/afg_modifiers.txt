@@ -1,0 +1,3 @@
+afg_demotion = {
+	pop_demotion_time_mult = -10.0
+}
