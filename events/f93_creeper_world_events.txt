@@ -56,19 +56,25 @@ country_event = {
 	fire_only_once = yes
 
 	immediate = {
+		every_country = { set_timed_country_flag = { flag = creeper_spread_phase days = 181 } }
 		random_system = {
 			limit = {
+				any_system_planet = { creeper_can_land = yes }
 				NOR = {
 					any_system_planet = { is_homeworld = yes }
+					has_star_flag = sealed_system
 					any_neighbor_system = {
 						any_system_planet = { is_homeworld = yes }
 					}
 				}
 			}
+			set_star_flag = creeper_present_in_system
 			random_system_planet = {
+				limit = { creeper_can_land = yes }
 				planet_event = { id = f93creeper_world.1 }
 			}
 			system_event = { id = f93creeper_world.4 days = 30 random = 30 } 
+			set_name = INFECTED
 		}
 	}
 }
@@ -81,10 +87,20 @@ system_event = {
 	trigger = {
 		any_system_planet = {
 			NOT = { has_planet_flag = creeper_present }
-			creeper_can_land = yes	
+			creeper_can_land = yes
 		}
 	}
 	immediate = {
+		every_country = { set_timed_country_flag = { flag = creeper_spread_phase days = 181 } }
+		closest_system = {
+			use_bypasses = no
+			min_steps = 1
+			max_steps = 2
+			limit = { NOT = { has_star_flag = creeper_present_in_system } any_system_planet = { creeper_can_land = yes }}
+			set_star_flag = creeper_present_in_system
+			system_event = { id = f93creeper_world.4 days = 120 random = 60 }
+			set_name = INFECTED
+		}
 		random_system_planet = {
 			limit = {
 				NOT = { has_planet_flag = creeper_present }
@@ -96,12 +112,43 @@ system_event = {
 	}
 }
 
-planet_event = {
+country_event = {
 	id = f93creeper_world.5
-	hide_window = yes
+	#hide_window = yes
 	is_triggered_only = yes
+	picture = GFX_evt_news_room
 
+	title = "its here"
+	desc = "what now?"
+	
+	trigger = {
+		any_system = {
+			has_star_flag = creeper_present_in_system
+			is_surveyed = { who = ROOT status = yes }
+		}
+		NOT = { has_country_flag = creeper_spotted }
+	}
 	immediate = {
-		solar_system = { system_event = { id = f93creeper_world.4 } }
+		set_country_flag = creeper_spotted
+	}
+	option = {
+
+	}
+}
+
+country_event = {
+	id = f93creeper_world.6
+	is_triggered_only = yes
+	picture = GFX_evt_news_room
+	
+	title = "its over"
+	desc = "what now?"
+	trigger = {
+		NOT = { has_country_flag = creeper_spread_phase }
+	}
+	immediate = {
+	}
+	option = {
+
 	}
 }
