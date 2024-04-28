@@ -1,7 +1,5 @@
-tech_riftjump_city = {
-	cost = {
-		factor = 1000
-	}
+tech_riftjump_town = {
+	cost = @tier1cost1
 	area = physics
 	tier = 1
 	category = { field_manipulation }
@@ -24,6 +22,40 @@ tech_riftjump_city = {
 			factor = @ap_technological_ascendancy_rare_tech
 			has_ascension_perk = ap_technological_ascendancy
 		}
+	}
+	ai_weight = {
+		base = 1000
+
+	}
+}
+tech_riftjump_city = {
+	cost = @tier2cost1
+	area = physics
+	tier = 2
+	category = { field_manipulation }
+	prerequisites = { "tech_riftjump_town" }
+	is_rare = yes
+	weight = 10
+	weight_modifier = {
+		modifier = {
+			factor = 10
+			has_country_flag = creeper_spotted
+		}
+		modifier = {
+			factor = 10
+			has_country_flag = creeper_invasion
+		}
+		modifier = {
+			factor = 10
+			years_passed > 10
+		}
+		modifier = {
+			factor = @ap_technological_ascendancy_rare_tech
+			has_ascension_perk = ap_technological_ascendancy
+		}
+	}
+	ai_weight = {
+		base = 1000
 	}
 }
 

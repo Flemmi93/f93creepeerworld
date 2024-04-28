@@ -1,30 +1,55 @@
-riftjump_decision_creation = {
+riftjump_decision_creation_ai_techcheat = {
+	owned_planets_only = yes
+	icon = default
+	potential = { owner = { is_ai = yes } }
+
+	effect = { owner = { give_technology = { tech = tech_riftjump_town } } }
+	allow = { always = yes }
+	ai_weight = {
+		weight = 0
+		modifier = {
+			add = 100
+			owner = { has_country_flag = creeper_spotted }
+		}
+		modifier = {
+			add = 100
+			years_passed > 15
+		}
+	}
+}
+riftjump_decision_creation_ai = {
 	owned_planets_only = yes
 	icon = default
 	resources = {
 		category = decisions
 		cost = {
 			energy = 1000
-			#creeper_artifacts = 1
+			creeper_artifacts = 1
 			influence = 100
 		}
 	}
 
+	enactment_time = 180
+
 	prerequisites = {
-		"tech_riftjump_city"
+		"tech_riftjump_town"
 	}
-	
-	enactment_time = 360
+
+	potential = { owner = { is_ai = yes } }
+
+	allow = {
+		owner = { NOT = { has_country_flag = riftjump_city_created } }
+	}
 
 	effect = { 
-		custom_tooltip = riftjump_city_created_desc
 		hidden_effect = {
 			owner = { set_country_flag = riftjump_city_created }
 		}
+		add_building = building_riftjump_town_main
 	}
 
 	ai_weight = {
-		weight = 1
+		weight = 10
 		modifier = {
 			factor = 10
 			owner = { has_country_flag = creeper_spotted }
@@ -40,18 +65,52 @@ riftjump_decision_creation = {
 	}
 }
 
+riftjump_decision_creation_ai_upgrade = {
+	owned_planets_only = yes
+	icon = default
+	resources = {
+		category = decisions
+		cost = {
+			energy = 1000
+			creeper_artifacts = 1
+			influence = 100
+		}
+	}
+
+	enactment_time = 360
+
+	prerequisites = {
+		"tech_riftjump_city"
+	}
+
+	potential = { owner = { is_ai = yes } }
+
+	allow = {
+		owner = { NOT = { has_country_flag = riftjump_city_created } }
+	}
+
+	effect = { 
+		remove_building = building_riftjump_town_main
+		add_building = building_riftjump_city_main
+	}
+
+	ai_weight = {
+		weight = 100
+	}
+}
+
 riftjump_decision = {
 	owned_planets_only = yes
 	icon = default
 	resources = {
-		category = decision
+		category = decisions
 		cost = {
 			energy = 1000
 			#creeper_artifacts = 1
 		}
 	}
 	prerequisites = {
-		"tech_riftjump_city"
+		"tech_riftjump_town"
 	}
 
 	potential = {
@@ -60,17 +119,22 @@ riftjump_decision = {
 				has_country_flag = creeper_spotted
 				has_country_flag = creeper_invasion
 				has_country_flag = riftjump_city_created
-				has_technology = tech_riftjump_city
+				has_technology = tech_riftjump_town
 			}
 		}
 	}
 
 	allow = {
-		owner = { has_country_flag = riftjump_city_created }
+		OR = {
+			has_building = building_riftjump_town_main
+			has_building = building_riftjump_city_main
+		}
 	}
 
-	effect = { planet_event = { id = riftjump_city.1 } }
-
+	effect = { 	
+		custom_tooltip = riftjump_decision_desc
+		hidden_effect = { planet_event = { id = riftjump_city.1 } }
+	}
 	
 	ai_weight = {
 		weight = 1

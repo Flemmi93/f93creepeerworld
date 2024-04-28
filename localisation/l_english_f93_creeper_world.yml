@@ -1,0 +1,20 @@
+﻿l_english:
+#Technology
+ tech_riftjump_town: "Riftjump Base"
+ tech_riftjump_town_desc: "Our first try at creating a riftjump viable building. FTL travel from a planet's surface is dangerous and most of the engineering goes into back ups for more backups"
+ tech_riftjump_city: "Advanced Riftjump Base"
+ tech_riftjump_city_desc: "We now now how many back ups anyone back up needs, we can significantly improve on our earlier designs"
+#Events
+ riftjump_city.1.name: "Actitvate the Riftjump"
+ riftjump_city.1.desc: "§Y[riftjump_origin.GetName]§! can no longer be held. The Creeper is too powerful. The unguided Riftjump has taken us to §Y[riftjump_target.GetName]§!"
+ riftjump_city.1.desc2: "Despite our Position on §Y[riftjump_origin.GetName]§! being untenable, we can no longer retreat. We have to turn the tide here and now!"
+ riftjump_city.1.a: "We start anew"
+ riftjump_city.1.b: "we have nowhere to go!"
+#Buildings
+ building_riftjump_town_main: "Riftjump Town"
+ building_riftjump_town_main_desc: "A small Planform able to take itself and most of what's on top of it with it."
+ building_riftjump_city_main: "Riftjump City"
+ building_riftjump_city_main_desc: "A vast collection of connected structures, able to skip the emptiness of space from planet to planet."
+#Decisions
+ riftjump_decision: "$riftjump_city.1.name$"
+ riftjump_decision_desc: "We activate the riftjump and leave §Y[Root.Planet.GetName]§! to places unknown"

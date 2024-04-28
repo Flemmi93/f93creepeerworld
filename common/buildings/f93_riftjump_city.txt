@@ -1,0 +1,75 @@
+building_riftjump_town_main = {
+	can_be_ruined = no
+	position_priority = 50
+	base_buildtime = @b1_time
+	base_cap_amount = 1
+
+	category = government
+	
+	potential = {
+		exists = owner
+	}
+	
+	upgrades = {
+		"building_riftjump_city_main"
+	}
+
+	prerequisites = {
+#		"tech_planetary_government"
+	}
+	show_tech_unlock_if = {
+		always = yes
+	}
+
+	resources = {
+		category = planet_buildings
+		cost = {
+			alloys = 50
+			creeper_artifacts = 1
+		}
+		upkeep = {
+			energy = @b1_upkeep
+		}
+		produces = {
+			trigger = { exists = owner }
+			energy = 0.25
+			multiplier = trigger:num_pops
+		}
+		produces = {
+			trigger = { exists = owner }
+			minerals = 0.25
+			multiplier = trigger:num_pops
+		}
+		produces = {
+			trigger = { exists = owner }
+			consumer_goods = 0.15
+			multiplier = trigger:num_pops
+		}
+		produces = {
+			trigger = { exists = owner }
+			alloys = 0.15
+			multiplier = trigger:num_pops
+		}
+	}
+
+	planet_modifier = {
+		planet_max_buildings_add = 5
+	}
+	triggered_planet_modifier = {
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			
+		}
+		
+	
+	}
+}
+
+building_riftjump_city_main = {
+	category = government
+	potential = {
+		always = no
+	}
+}

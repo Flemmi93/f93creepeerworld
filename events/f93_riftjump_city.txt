@@ -6,16 +6,30 @@ planet_event = {
 	is_triggered_only = yes
 
 	title = riftjump_city.1.name
-	desc = riftjump_city.1.desc
+	desc = {
+		text = riftjump_city.1.desc
+		trigger = { exists = event_target:riftjump_target }
+	}
+	desc = {
+		text = riftjump_city.1.desc2
+		trigger = { NOT ={ exists = event_target:riftjump_target } }
+	}
 	picture = GFX_evt_news_room
 	immediate = {
 		save_event_target_as = riftjump_origin
+		solar_system = { set_star_flag = riftjump_city_origin_system }
 		#each random_system has fewer and fewer requirements, there should always be a viable path, landing in home systems or near them is the lowest priority
 		random_system = {
 			limit = {
 				NOR = {
-					owner = { has_country_flag = just_moved }
+					has_star_flag = riftjump_city_origin_system
 					exists = owner
+					has_star_flag = hostile_system
+					has_star_flag = guardian
+					has_star_flag = enclave
+					has_star_flag = primitive_system
+					has_star_flag = lcluster
+					has_star_flag = sealed_system
 					any_fleet_in_system = {
 						owner = {
 							is_hostile = root.owner
@@ -26,101 +40,135 @@ planet_event = {
 						any_system_planet = { is_homeworld = yes }
 					}
 				}
-				any_system_planet = { habitable_planet_not_urban = yes }
+				any_system_planet = {
+					habitable_planet_not_urban = yes
+					num_sapient_pops = 0
+				}
 			}
 			random_system_planet = {
 				limit = { habitable_planet_not_urban = yes }
 				save_event_target_as = riftjump_target
 			}
-			owner = { set_country_flag = just_moved }
 		}
 		random_system = {
 			limit = {
 				NOR = {
-					owner = { has_country_flag = just_moved }
+					has_star_flag = riftjump_city_origin_system
 					exists = owner
+					has_star_flag = hostile_system
+					has_star_flag = guardian
+					has_star_flag = enclave
+					has_star_flag = primitive_system
+					has_star_flag = lcluster
+					has_star_flag = sealed_system
 					any_system_planet = { is_homeworld = yes }
 					any_neighbor_system = {
 						any_system_planet = { is_homeworld = yes }
 					}
 				}
-				any_system_planet = { habitable_planet_not_urban = yes }
+				any_system_planet = {
+					habitable_planet_not_urban = yes
+					num_sapient_pops = 0
+				}
 			}
 			random_system_planet = {
 				limit = { habitable_planet_not_urban = yes }
 				save_event_target_as = riftjump_target
 			}
-			owner = { set_country_flag = just_moved }
 		}
 		random_system = {
 			limit = {
 				NOR = {
-					owner = { has_country_flag = just_moved }
+					has_star_flag = riftjump_city_origin_system
 					exists = owner
 					any_system_planet = { is_homeworld = yes }
 				}
-				any_system_planet = { habitable_planet_not_urban = yes }
+				any_system_planet = {
+					habitable_planet_not_urban = yes
+					num_sapient_pops = 0
+				}
 			}
 			random_system_planet = {
 				limit = { habitable_planet_not_urban = yes }
 				save_event_target_as = riftjump_target
 			}
-			owner = { set_country_flag = just_moved }
 		}
 		random_system = {
 			limit = {
 				NOR = {
-					owner = { has_country_flag = just_moved }
+					has_star_flag = riftjump_city_origin_system
 					exists = owner
 				}
-				any_system_planet = { habitable_planet_not_urban = yes }
+				any_system_planet = {
+					habitable_planet_not_urban = yes
+					num_sapient_pops = 0
+				}
 			}
 			random_system_planet = {
 				limit = { habitable_planet_not_urban = yes }
 				save_event_target_as = riftjump_target
 			}
-			owner = { set_country_flag = just_moved }
 		}
 	}
 	option = {
 		name = riftjump_city.1.a
-		hidden_effect = { owner = { remove_country_flag = just_moved } }
+		trigger = { exists = event_target:riftjump_target }
+		owner = {
+			every_controlled_fleet = {
+				limit = {
+					is_ship_class = shipclass_starbase
+					solar_system = {
+						has_star_flag = riftjump_city_origin_system
+					}
+				}
+				destroy_fleet = this
+			}
+		}
+	}
+
+	option = {
+		name = riftjump_city.1.b
+		trigger = { NOT = { exists = event_target:riftjump_target } }
+		owner = { add_resource = { energy = 1000 } }
 	}
 
 	after = {
-		event_target:riftjump_target = {
-			create_colony = {
-				owner = root
-				species = root.owner_main_species
-				ethos = owner
-			}
-			solar_system = {
-				create_starbase = {
+		if = { limit = { exists = event_target:riftjump_target } 
+			event_target:riftjump_target = {
+				if = {
+					limit = {
+						num_free_districts = {
+							type = any
+							value < 5
+						}
+					}
+					while = {
+						count = 4
+						random_deposit = { limit = { is_blocker = yes } clear_blocker = yes }
+					}
+				}
+				create_colony = {
 					owner = root
-					size = starbase_starport
-					module = shipyard
+					species = root.owner_main_species
+					ethos = owner
+				}
+				solar_system = {
+					create_starbase = {
+						owner = root
+						size = starbase_starport
+						module = shipyard
+					}
 				}
 			}
-		}
-		every_owned_pop = {
-			resettle_pop = {
-				pop = this
-				planet = event_target:riftjump_target
+			every_owned_pop = {
+				resettle_pop = {
+					pop = this
+					planet = event_target:riftjump_target
+				}
 			}
-		}
-		hidden_effect = {
-			event_target:riftjump_target = { random_owned_pop = { kill_pop = yes } }
-			event_target:riftjump_target = { validate_planet_buildings_and_districts = yes }
-			create_country = {
-				name = random
-				type = default
-				auto_delete = no
-				effect = { save_event_target_as = riftjump_cleanup }
+			hidden_effect = {
+			solar_system = { remove_star_flag = riftjump_city_origin_system }
 			}
-			solar_system = { starbase = { save_event_target_as = starbase_origin_system } }
-			event_target:starbase_origin_system = { set_starbase_size = starbase_outpost }
-			event_target:starbase_origin_system = { set_owner = event_target:riftjump_cleanup }
-			event_target:riftjump_cleanup = { destroy_country = yes }
 		}
 	}
 }
