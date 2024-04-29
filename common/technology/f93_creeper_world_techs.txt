@@ -47,7 +47,7 @@ tech_riftjump_city = {
 		}
 		modifier = {
 			factor = 10
-			years_passed > 10
+			years_passed > 20
 		}
 		modifier = {
 			factor = @ap_technological_ascendancy_rare_tech
