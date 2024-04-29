@@ -220,3 +220,13 @@ country_event = {
 		capital_scope = { planet_event = { id = riftjump_city.1 days = 30 random = 30 } }
 	}
 }
+
+planet_event = {
+	id = riftjump_city.4
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		remove_building = building_riftjump_town_main
+		remove_building = building_riftjump_city_main
+	}
+}

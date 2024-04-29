@@ -135,44 +135,31 @@ planet_event = {
 	is_triggered_only = yes
 	pre_triggers = {
 		has_owner = yes
+		has_ground_combat = no
+		is_occupied_flag = no
 	}
 	trigger = {
 		has_planet_flag = creeper_present
 	}
 	immediate = {
+		every_country = { establish_communications_no_message = root.owner }
 		set_planet_flag = creeper_invasion
-		random_list = {
-			50 = {
-				while = {
-					count = 2
-					create_army = {
-						name = Creeper
-						owner = event_target:creeper_country
-						type = creeper_army
-					}
-				}
+		set_variable = { which = lucky_evacuees value = trigger:num_pops }
+		divide_variable = { which = lucky_evacuees value = 5 }
+		ceiling_variable = lucky_evacuees
+		while = {
+			count = lucky_evacuees
+			random_owned_pop = {
+				resettle_pop = { pop = this planet = owner.capital_scope }
 			}
-			20 = {
-				while = {
-					count = 6
-					create_army = {
-						name = Creeper
-						owner = event_target:creeper_country
-						type = creeper_army
-					}
-				}
+			random_owned_pop = {
+				pop_event = { id = refugees.4 }
 			}
-			12 = {
-				while = {
-					count = 2
-					create_army = {
-						name = Creeper
-						owner = event_target:creeper_country
-						type = creeper_spore
-					}
-				}
+			random_owned_pop = {
+				pop_event = { id = refugees.4 }
 			}
 		}
+		destroy_colony = yes
 	}
 }
 
@@ -221,5 +208,64 @@ country_event = {
 			}
 		}
 		every_country = { establish_communications_no_message = event_target:creeper_country }
+	}
+}
+
+country_event = {
+	id = f93creeper_world.8
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		random_system_within_border = {
+			if = {
+				limit = { any_system_planet = { is_colony = yes } }
+				every_system_planet = {
+					limit = {
+						is_colony = yes
+						NOR = {
+							has_building = building_riftjump_town_main
+							has_building = building_riftjump_city_main
+						}
+					}
+					planet_event = { id = f93creeper_world.6 }
+				}
+				every_system_planet = {
+					limit = {
+						is_colony = yes
+						OR = {
+							has_building = building_riftjump_town_main
+							has_building = building_riftjump_city_main
+						}
+					}
+					planet_event = { id = f93creeper_world.9 }
+				}
+			}
+			else = {
+				solar_system = { set_timed_star_flag = { flag = system_lost_to_creeper days = 10 } }
+				space_owner = {
+					every_controlled_fleet = {
+						limit = {
+							is_ship_class = shipclass_starbase
+							solar_system = {
+								has_star_flag = system_lost_to_creeper
+							}
+						}
+						destroy_fleet = this
+					}
+				}
+			}
+		}
+	}
+}
+
+planet_event = {
+	id = f93creeper_world.9
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = { any_targeting_situation = { is_situation_type = creeper_invasion_situation } }
+	}
+	immediate = {
+		owner = { start_situation = { type = creeper_invasion_situation target = ROOT } }
 	}
 }
