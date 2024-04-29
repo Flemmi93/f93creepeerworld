@@ -1,3 +1,46 @@
+	#Breakdown Jops per 100 Pops
+	#	Town Workers = 50
+	#		4	Entertainer
+	#		2	Foundry / Catalytic
+	#		2	Artisan / Artificer
+	#		18	Soldiers
+	#		8	Miners
+	#		8	Generator
+	#		8	Farmer
+	#		6	Angler
+	#		2	Perldivers (angler only)
+	#	Citty Workers = 75
+	#		7	Entertainer
+	#		8	Foundry / Catalytic
+	#		4	Artisan / Artificer
+	#		22	Soldiers
+	#		12	Miners
+	#		10	Generator
+	#		10	Farmer
+	#		7	Angler
+	#		3	Perldivers (angler only)
+	
+@rjc_amenities1 =	0.04
+@rjc_amenities2 =	0.07
+@rjc_alloys1 =		0.02
+@rjc_alloys2 =		0.8
+@rjc_csg1 =			0.02
+@rjc_csg2 =			0.4
+@rjc_soldiers2 = 	0.18
+@rjc_soldiers1 = 	0.22
+@rjc_miners1 = 		0.08
+@rjc_miners2 = 		0.12
+@rjc_generator1 = 	@rjc_miners1
+@rjc_generator2 = 	@rjc_miners2
+@rjc_genmachine1 = 	0.16
+@rjc_genmachine2 = 	0.20
+@rjc_farmer1 =		@rjc_miners1
+@rjc_farmer2 =		@rjc_miners2
+@rjc_anglers1 =		0.06
+@rjc_anglers2 =		0.07
+@rjc_pearldiv1 =	0.02
+@rjc_pearldiv2 =	0.03
+
 building_riftjump_town_main = {
 	can_be_ruined = no
 	position_priority = 50
@@ -69,18 +112,7 @@ building_riftjump_town_main = {
 		planet_stability_add = 10
 		pop_happiness = 0.1
 	}
-	#Breakdown Jops per 100 Pops
-	#	Regular Empire = 50
-	#		4	Entertainer
-	#		1	Foundry / Catalytic
-	#		1	Artisan / Artificer
-	#		23	Soldiers
-	#		7	Miners
-	#		7	Generator
-	#		7	Farmer
-	#		5	Angler
-	#		2	Perldivers (angler only)
-	
+
 	
 	#Ruler
 
@@ -96,94 +128,91 @@ building_riftjump_town_main = {
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes } }
-		job_entertainer_per_pop = 0.04
+		job_entertainer_per_pop = @rjc_amenities1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_gestalt = yes } }
-		job_maintenance_drone_per_pop = 0.04
+		job_maintenance_drone_per_pop = @rjc_amenities1
 	}
 		#Alloys
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_catalytic_empire = no } }
-		job_foundry_per_pop = 0.01
+		job_foundry_per_pop = @rjc_alloys1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_catalytic_empire = yes } }
-		job_catalytic_technician_per_pop = 0.01
+		job_catalytic_technician_per_pop = @rjc_alloys1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_gestalt = yes is_catalytic_empire = no } }
-		job_fabricator_per_pop = 0.01
+		job_fabricator_per_pop = @rjc_alloys1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_gestalt = yes is_catalytic_empire = yes } }
-		job_catalytic_drone_per_pop = 0.01
+		job_catalytic_drone_per_pop = @rjc_alloys1
 	}
 		#Consumer Goods
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_crafter_empire = no } }
-		job_artisan_per_pop = 0.01
+		job_artisan_per_pop = @rjc_csg1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_crafter_empire = yes } }
-		job_artificer_per_pop = 0.01
+		job_artificer_per_pop = @rjc_csg1
 	}
 	
-	#Basic Resources
-	#Soldiers
-	
+	#Worker
+		#Soldiers
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes } }
-		job_soldier_per_pop = 0.23
+		job_soldier_per_pop = @rjc_soldiers1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_gestalt = yes } }
-		job_warrior_drone_per_pop = 0.23
+		job_warrior_drone_per_pop = @rjc_soldiers1
 	}
-	#Minerals
+		#Minerals
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes } }
-		job_miner_per_pop = 0.07
+		job_miner_per_pop = @rjc_miners1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_gestalt = yes } }
-		job_mining_drone_per_pop = 0.07
+		job_mining_drone_per_pop = @rjc_miners1
 	}
-
-	#Energy
+		#Energy
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes } }
-		job_technician_per_pop = 0.07
+		job_technician_per_pop = @rjc_generator1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_hive_empire = yes } }
-		job_technician_drone_per_pop = 0.07
+		job_technician_drone_per_pop = @rjc_generator1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_machine_empire = yes } }
-		job_technician_drone_per_pop = 0.1
+		job_technician_drone_per_pop = @rjc_genmachine1
 	}
-
-	#Food
+		#Food
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_anglers_empire = no } }
-		job_farmer_per_pop = 0.07
+		job_farmer_per_pop = @rjc_farmer1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_hive_empire = yes } }
-		job_agri_drone_per_pop = 0.07
+		job_agri_drone_per_pop = @rjc_farmer1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_anglers_empire = yes } is_wet = yes }
-		job_angler_per_pop = 0.05
+		job_angler_per_pop = @rjc_anglers1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_anglers_empire = yes } is_wet = yes }
-		job_pearl_diver_per_pop = 0.02
+		job_pearl_diver_per_pop = @rjc_pearldiv1
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_anglers_empire = yes } is_wet = no }
-		job_farmer_per_pop = 0.07
+		job_farmer_per_pop = @rjc_farmer1
 	}
 
 	on_destroy = {
@@ -264,6 +293,7 @@ building_riftjump_city_main = {
 	#Ruler
 
 	#Specialist
+		#Amenities
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes } }
 		job_dimensional_portal_researcher_add = 1
@@ -274,95 +304,93 @@ building_riftjump_city_main = {
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes } }
-		job_entertainer_per_pop = 0.05
+		job_entertainer_per_pop = @rjc_amenities2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_gestalt = yes } }
-		job_maintenance_drone_per_pop = 0.05
+		job_maintenance_drone_per_pop = @rjc_amenities2
 	}
 		#Alloys
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_catalytic_empire = no } }
-		job_foundry_per_pop = 0.015
+		job_foundry_per_pop = @rjc_alloys2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_catalytic_empire = yes } }
-		job_catalytic_technician_per_pop = 0.015
+		job_catalytic_technician_per_pop = @rjc_alloys2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_gestalt = yes is_catalytic_empire = no } }
-		job_fabricator_per_pop = 0.015
+		job_fabricator_per_pop = @rjc_alloys2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_gestalt = yes is_catalytic_empire = yes } }
-		job_catalytic_drone_per_pop = 0.015
+		job_catalytic_drone_per_pop = @rjc_alloys2
 	}
 		#Consumer Goods
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_crafter_empire = no } }
-		job_artisan_per_pop = 0.015
+		job_artisan_per_pop = @rjc_csg2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_crafter_empire = yes } }
-		job_artificer_per_pop = 0.015
+		job_artificer_per_pop = @rjc_csg2
 	}
 	
-	#Basic Resources
-	#Soldiers
-	
+	#Worker
+		#Soldiers
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes } }
-		job_soldier_per_pop = 0.25
+		job_soldier_per_pop = @rjc_soldiers2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_gestalt = yes } }
-		job_warrior_drone_per_pop = 0.25
+		job_warrior_drone_per_pop = @rjc_soldiers2
 	}
-	#Minerals
+		#Minerals
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes } }
-		job_miner_per_pop = 0.075
+		job_miner_per_pop = @rjc_miners2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_gestalt = yes } }
-		job_mining_drone_per_pop = 0.075
+		job_mining_drone_per_pop = @rjc_miners2
 	}
-
-	#Energy
+		#Energy
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes } }
-		job_technician_per_pop = 0.075
+		job_technician_per_pop = @rjc_generator2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_hive_empire = yes } }
-		job_technician_drone_per_pop = 0.075
+		job_technician_drone_per_pop = @rjc_generator2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_machine_empire = yes } }
-		job_technician_drone_per_pop = 0.15
+		job_technician_drone_per_pop = @rjc_genmachine2
 	}
-
-	#Food
+		#Food
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_anglers_empire = no } }
-		job_farmer_per_pop = 0.075
+		job_farmer_per_pop = @rjc_farmer2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_hive_empire = yes } }
-		job_agri_drone_per_pop = 0.075
+		job_agri_drone_per_pop = @rjc_farmer2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_anglers_empire = yes } is_wet = yes }
-		job_angler_per_pop = 0.075
+		job_angler_per_pop = @rjc_anglers2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_anglers_empire = yes } is_wet = yes }
-		job_pearl_diver_per_pop = 0.05
+		job_pearl_diver_per_pop = @rjc_pearldiv2
 	}
 	triggered_planet_modifier = {
 		potential = { owner = { is_regular_empire = yes is_anglers_empire = yes } is_wet = no }
-		job_farmer_per_pop = 0.075
+		job_farmer_per_pop = @rjc_farmer2
 	}
+
 
 	on_destroy = {
 	#	owner = { add_resource = { creeper_artifacts = 1 } }

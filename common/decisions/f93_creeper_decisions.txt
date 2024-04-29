@@ -4,6 +4,7 @@ riftjump_decision_creation_ai_techcheat = {
 	potential = {
 		owner = { is_ai = yes }
 		owner = { NOT = { has_technology = tech_riftjump_town } }
+		always = no
 	}
 
 	effect = { owner = { give_technology = { tech = tech_riftjump_town } } }
@@ -20,10 +21,11 @@ riftjump_decision_creation_ai_techcheat = {
 		}
 	}
 }
+
 riftjump_decision_creation_ai = {
 	owned_planets_only = yes
 	potential = {
-		#owner = { is_ai = yes }
+		owner = { is_ai = yes }
 		NOR = {
 			has_building = building_riftjump_town_main
 			has_building = building_riftjump_city_main
@@ -33,13 +35,13 @@ riftjump_decision_creation_ai = {
 	resources = {
 		category = decisions
 		cost = {
-			#alloys = 400
+			alloys = @b1_minerals
 			#creeper_artifacts = 1
 			#influence = 100
 		}
 	}
 
-	enactment_time = 180
+	enactment_time = b1_time
 
 	prerequisites = {
 		"tech_riftjump_town"
@@ -82,7 +84,7 @@ riftjump_decision_creation_ai_upgrade = {
 	resources = {
 		category = decisions
 		cost = {
-			alloys = 1000
+			alloys = @b2_minerals
 			#creeper_artifacts = 1
 			#influence = 100
 		}
@@ -91,7 +93,8 @@ riftjump_decision_creation_ai_upgrade = {
 	show_tech_unlock_if = {
 		always = no
 	}
-	enactment_time = 360
+
+	enactment_time = b2_time
 
 	prerequisites = {
 		"tech_riftjump_city"
@@ -143,6 +146,7 @@ riftjump_decision = {
 			has_building = building_riftjump_town_main
 			has_building = building_riftjump_city_main
 		}
+		
 	}
 
 	effect = { 	
