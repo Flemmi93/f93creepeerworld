@@ -10,6 +10,10 @@
  riftjump_city.1.desc2: "Despite our Position on §Y[riftjump_origin.GetName]§! being untenable, we can no longer retreat. We have to turn the tide here and now!"
  riftjump_city.1.a: "We start anew"
  riftjump_city.1.b: "we have nowhere to go!"
+ riftjump_effect_desc: "Our City will rift from to §Y[event_target:riftjump_target.GetName]§!$NEW_LINE$We will abandon §Y[event_target:riftjump_origin.GetName]§! to the creeper."
+ f93_cw_start.1.name: "The Old Man"
+ f93_cw_start.1.desc: "§YYou§!, the Commander of the Anti Creeper Effort, where approached by an §YOld Man§!. he gave you a data disk.$NEW_LINE$Analysis of the data revealed blueprints for a great city capable of jumping from planet to planet, avoiding the creeper.$NEW_LINE$Sadly, the time is short and the plans have to be scaled down. A §Y$tech_riftjump_town$§! was constrcuted on §Y[capital_scope.GetNae]§!$NEW_LINE$The closer to completion the project came, the more aggresive the $creeper$ seemed to attack out defensese. It was a close call, but now that the §Y$tech_riftjump_town$§! is complete, you should not waste any more time."
+ f93_cw_start.1.a: "Let's make that §GDecision§!"
 #Buildings
  building_riftjump_town_main: "Riftjump Town"
  building_riftjump_town_main_desc: "A small Planform able to take itself and most of what's on top of it with it."
@@ -22,7 +26,21 @@
  mod_job_angler_per_pop: "§G+1§! $job_angler$ Job per $VALUE$ Pops"
  mod_job_pearl_diver_per_pop: "§G+1§! $job_pearl_diver$ Job per $VALUE$ Pops"
  afg_demotion: ""
- creeper_invasion_country: ""
+ creeper_invasion_country: "Creeper Invasion"
+ creeper: "§BCreeper§!"
 #Armies
  creeper_army: "Creeper Flow"
  spore_army: "Creeper Spores"
+#Modifier
+ surviving_creeper_modifier_effect: "Whenever we $riftjump_city.1.name$ we will have to start over. We will only keep the $tech_riftjump_town$ and the most essential structures on it."
+ surviving_creeper_modifier: "Surviving the Creeper"
+ surviving_creeper_modifier_desc: "At this point the only thing we can do is focus on survival."
+#Starbase
+ creeper_starbase: "Creeper Space Asset"
+ creeper_starbase_plural: "Creeper Space Assets"
+#Situation
+ creeper_invasion_situation: "Creeper Level [targer.GetName]"
+ creeper_invasion_situation_type: "Creeper Level"
+ creeper_invasion_situation_monthly_change_tooltip: "Creeper Level"
+ creeper_invasion_situation_desc: "The $creeper$ is rising if it gets too high we have to leave §Y[target.GetName]§!."
+ creeper_flooded_the_world: "The $creeper$ will flooded §Y[targer.GetName]§!"

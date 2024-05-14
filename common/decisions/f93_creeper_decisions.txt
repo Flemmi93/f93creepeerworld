@@ -119,7 +119,7 @@ riftjump_decision = {
 		"tech_riftjump_town"
 	}
 
-	enactment_time = 30
+	# enactment_time = 30
 
 	potential = {
 		owner = {

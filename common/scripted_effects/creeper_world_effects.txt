@@ -1,0 +1,84 @@
+f93_cw_move_buildings_effect = {
+	event_target:riftjump_target = { remove_building = building_colony_shelter }
+	event_target:riftjump_target = { remove_building = building_deployment_post }
+	event_target:riftjump_target = { remove_building = building_hive_capital }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_colony_shelter } } event_target:riftjump_target = { add_building = building_colony_shelter } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_capital } } event_target:riftjump_target = { add_building = building_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_major_capital } } event_target:riftjump_target = { add_building = building_major_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_system_capital } } event_target:riftjump_target = { add_building = building_system_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_deployment_post } } event_target:riftjump_target = { add_building = building_deployment_post } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_machine_capital } } event_target:riftjump_target = { add_building = building_machine_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_machine_major_capital } } event_target:riftjump_target = { add_building = building_machine_major_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_machine_system_capital } } event_target:riftjump_target = { add_building = building_machine_system_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_hive_capital } } event_target:riftjump_target = { add_building = building_hive_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_hive_major_capital } } event_target:riftjump_target = { add_building = building_hive_major_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_resort_capital } } event_target:riftjump_target = { add_building = building_resort_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_resort_major_capital } } event_target:riftjump_target = { add_building = building_resort_major_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_slave_capital } } event_target:riftjump_target = { add_building = building_slave_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_slave_major_capital } } event_target:riftjump_target = { add_building = building_slave_major_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_imperial_capital } } event_target:riftjump_target = { add_building = building_imperial_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_imperial_machine_capital } } event_target:riftjump_target = { add_building = building_imperial_machine_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_imperial_hive_capital } } event_target:riftjump_target = { add_building = building_imperial_hive_capital } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_town_main } } event_target:riftjump_target = { add_building = building_riftjump_town_main } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_city_main } } event_target:riftjump_target = { add_building = building_riftjump_city_main } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_robot_assembly_plant } } event_target:riftjump_target = { add_building = building_robot_assembly_plant } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_robot_assembly_complex } } event_target:riftjump_target = { add_building = building_robot_assembly_complex } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_machine_assembly_plant } } event_target:riftjump_target = { add_building = building_machine_assembly_plant } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_machine_assembly_complex } } event_target:riftjump_target = { add_building = building_machine_assembly_complex } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_spawning_pool } } event_target:riftjump_target = { add_building = building_spawning_pool } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_offspring_nest } } event_target:riftjump_target = { add_building = building_offspring_nest } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_necrophage_elevation_chamber } } event_target:riftjump_target = { add_building = building_necrophage_elevation_chamber } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_necrophage_house_of_apotheosis } } event_target:riftjump_target = { add_building = building_necrophage_house_of_apotheosis } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_clone_vats } } event_target:riftjump_target = { add_building = building_clone_vats } }
+	while = {
+		count = 5
+		if = { limit = { event_target:riftjump_origin = { has_building = building_clone_army_clone_vat } } event_target:riftjump_target = { add_building = building_clone_army_clone_vat } }
+		event_target:riftjump_origin = { remove_building = building_clone_army_clone_vat }
+	}
+	if = { limit = { event_target:riftjump_origin = { has_building = building_posthumous_employment_center } } event_target:riftjump_target = { add_building = building_posthumous_employment_center } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_toxic_bath_hive } } event_target:riftjump_target = { add_building = building_toxic_bath_hive } }
+	if = { limit = { event_target:riftjump_origin = { has_building = building_toxic_bath_machine } } event_target:riftjump_target = { add_building = building_toxic_bath_machine } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_gen_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_gen_exp_1 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_gen_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_gen_exp_2 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_min_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_min_exp_1 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_min_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_min_exp_2 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_eat_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_eat_exp_1 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_eat_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_eat_exp_2 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_aly_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_aly_exp_1 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_aly_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_aly_exp_2 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_cgs_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_cgs_exp_1 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_cgs_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_cgs_exp_2 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_science_1 } } event_target:riftjump_target = { add_building = building_riftjump_science_1 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_science_2 } } event_target:riftjump_target = { add_building = building_riftjump_science_2 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_ref_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_ref_exp_1 } }
+	# if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_ref_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_ref_exp_2 } }
+	
+}
+
+creeper_infects_system_effect = {
+	set_star_flag = creeper_present_in_system
+	# set_name = INFECTED #for test purpose, to see the change more easly
+	if = {
+		limit = { always = yes } # NOT = { exists = owner } }
+		every_fleet_in_system = {
+			limit = { owner = { NOR = { is_gestalt = yes is_regular_empire = yes } } }
+			destroy_fleet = this
+		}
+		if = {
+			limit = { exists = event_target:creeper_country }
+			create_starbase = {
+				owner = event_target:creeper_country
+				size = starbase_outpost
+			}
+		}
+	}
+	
+	random_system_planet = {
+		limit = {
+			NOT = { has_planet_flag = creeper_present }
+			creeper_can_land = yes	
+		}
+		planet_event = { id = f93creeper_world.1 }
+		solar_system = { system_event = { id = f93creeper_world.4 days = 90 random = 90 } }
+	}
+}

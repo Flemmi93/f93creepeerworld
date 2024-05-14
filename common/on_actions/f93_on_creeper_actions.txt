@@ -1,3 +1,9 @@
+on_game_start_country = {
+	events = {
+		f93creeper_world.3
+	}
+}
+
 on_bi_yearly_pulse_country = {
 	events = {
 		riftjump_city.2
@@ -8,5 +14,7 @@ on_monthly_pulse_country = {
 	events = {
 		f93creeper_world.5
 		f93creeper_world.8
+		f93_cw_start.1
+		riftjump_city.5 # disabled influence
 	}
 }

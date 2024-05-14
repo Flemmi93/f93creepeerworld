@@ -12,7 +12,7 @@ planet_event = {
 	}
 	desc = {
 		text = riftjump_city.1.desc2
-		trigger = { NOT ={ exists = event_target:riftjump_target } }
+		trigger = { NOT = { exists = event_target:riftjump_target } }
 	}
 	picture = GFX_evt_news_room
 	immediate = {
@@ -57,19 +57,10 @@ planet_event = {
 	option = {
 		name = riftjump_city.1.a
 		trigger = { exists = event_target:riftjump_target }
-		hidden_effect = { 
-			owner = {
-				add_modifier = { modifier = afg_demotion days = 2 }
-				every_controlled_fleet = {
-					limit = {
-						is_ship_class = shipclass_starbase
-						solar_system = {
-							has_star_flag = riftjump_city_origin_system
-						}
-					}
-					destroy_fleet = this
-				}
-			}
+		custom_tooltip = riftjump_effect_desc
+		if = {
+			limit = { NOT = { has_modifier = surviving_creeper_modifier } }
+			add_modifier = { modifier = surviving_creeper_modifier }
 		}
 	}
 
@@ -81,7 +72,8 @@ planet_event = {
 
 	after = {
 		hidden_effect = {
-			if = { limit = { exists = event_target:riftjump_target } 
+			if = {
+				limit = { exists = event_target:riftjump_target }
 				event_target:riftjump_target = {
 					if = {
 						limit = {
@@ -93,6 +85,15 @@ planet_event = {
 						while = {
 							count = 4
 							random_deposit = { limit = { is_blocker = yes } clear_blocker = yes }
+						}
+						if = {
+							limit = {
+								num_free_districts = {
+									type = any
+									value < 5
+								}
+							}
+							add_deposit = random
 						}
 					}
 					create_colony = {
@@ -108,73 +109,47 @@ planet_event = {
 						}
 					}
 				}
+				#copy buildings
+				f93_cw_move_buildings_effect = yes
 				
-				#block to copy buildings
-				event_target:riftjump_target = { remove_building = building_colony_shelter }
-				event_target:riftjump_target = { remove_building = building_deployment_post }
-				event_target:riftjump_target = { remove_building = building_hive_capital }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_colony_shelter } } event_target:riftjump_target = { add_building = building_colony_shelter } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_capital } } event_target:riftjump_target = { add_building = building_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_major_capital } } event_target:riftjump_target = { add_building = building_major_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_system_capital } } event_target:riftjump_target = { add_building = building_system_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_deployment_post } } event_target:riftjump_target = { add_building = building_deployment_post } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_machine_capital } } event_target:riftjump_target = { add_building = building_machine_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_machine_major_capital } } event_target:riftjump_target = { add_building = building_machine_major_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_machine_system_capital } } event_target:riftjump_target = { add_building = building_machine_system_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_hive_capital } } event_target:riftjump_target = { add_building = building_hive_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_hive_major_capital } } event_target:riftjump_target = { add_building = building_hive_major_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_resort_capital } } event_target:riftjump_target = { add_building = building_resort_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_resort_major_capital } } event_target:riftjump_target = { add_building = building_resort_major_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_slave_capital } } event_target:riftjump_target = { add_building = building_slave_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_slave_major_capital } } event_target:riftjump_target = { add_building = building_slave_major_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_imperial_capital } } event_target:riftjump_target = { add_building = building_imperial_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_imperial_machine_capital } } event_target:riftjump_target = { add_building = building_imperial_machine_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_imperial_hive_capital } } event_target:riftjump_target = { add_building = building_imperial_hive_capital } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_town_main } } event_target:riftjump_target = { add_building = building_riftjump_town_main } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_city_main } } event_target:riftjump_target = { add_building = building_riftjump_city_main } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_robot_assembly_plant } } event_target:riftjump_target = { add_building = building_robot_assembly_plant } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_robot_assembly_complex } } event_target:riftjump_target = { add_building = building_robot_assembly_complex } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_machine_assembly_plant } } event_target:riftjump_target = { add_building = building_machine_assembly_plant } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_machine_assembly_complex } } event_target:riftjump_target = { add_building = building_machine_assembly_complex } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_spawning_pool } } event_target:riftjump_target = { add_building = building_spawning_pool } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_offspring_nest } } event_target:riftjump_target = { add_building = building_offspring_nest } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_necrophage_elevation_chamber } } event_target:riftjump_target = { add_building = building_necrophage_elevation_chamber } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_necrophage_house_of_apotheosis } } event_target:riftjump_target = { add_building = building_necrophage_house_of_apotheosis } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_clone_vats } } event_target:riftjump_target = { add_building = building_clone_vats } }
-				while = {
-					count = 5
-					if = { limit = { event_target:riftjump_origin = { has_building = building_clone_army_clone_vat } } event_target:riftjump_target = { add_building = building_clone_army_clone_vat } }
-					event_target:riftjump_origin = { remove_building = building_clone_army_clone_vat }
+				owner = {
+					every_controlled_fleet = {
+						limit = {
+							OR = {
+								is_ship_class = shipclass_starbase
+								is_ship_size = mining_station
+								is_ship_size = research_station 
+							}
+							
+							NOT = { is_ship_size = juggernaut }
+							solar_system = {
+								has_star_flag = riftjump_city_origin_system
+							}
+						}
+						destroy_fleet = this
+					}
+					every_controlled_fleet = {
+						limit = {
+							solar_system = {
+								has_star_flag = riftjump_city_origin_system
+							}
+							NOR = { is_ship_size = mining_station is_ship_size = research_station }
+						}
+						set_location = event_target:riftjump_target
+					}
+					add_modifier = { modifier = afg_demotion days = 2 }
 				}
-				if = { limit = { event_target:riftjump_origin = { has_building = building_posthumous_employment_center } } event_target:riftjump_target = { add_building = building_posthumous_employment_center } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_toxic_bath_hive } } event_target:riftjump_target = { add_building = building_toxic_bath_hive } }
-				if = { limit = { event_target:riftjump_origin = { has_building = building_toxic_bath_machine } } event_target:riftjump_target = { add_building = building_toxic_bath_machine } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_gen_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_gen_exp_1 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_gen_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_gen_exp_2 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_min_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_min_exp_1 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_min_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_min_exp_2 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_eat_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_eat_exp_1 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_eat_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_eat_exp_2 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_aly_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_aly_exp_1 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_aly_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_aly_exp_2 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_cgs_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_cgs_exp_1 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_cgs_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_cgs_exp_2 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_science_1 } } event_target:riftjump_target = { add_building = building_riftjump_science_1 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_science_2 } } event_target:riftjump_target = { add_building = building_riftjump_science_2 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_ref_exp_1 } } event_target:riftjump_target = { add_building = building_riftjump_ref_exp_1 } }
-			#	if = { limit = { event_target:riftjump_origin = { has_building = building_riftjump_ref_exp_2 } } event_target:riftjump_target = { add_building = building_riftjump_ref_exp_2 } }
-				
-				
 				solar_system = { remove_star_flag = riftjump_city_origin_system }
-			}
-		}
-		while = {
-			count = 49
-			random_owned_pop = {
-				resettle_pop = {
-					pop = this
-					planet = event_target:riftjump_target
+				while = {
+					count = 49
+					random_owned_pop = {
+						resettle_pop = {
+							pop = this
+							planet = event_target:riftjump_target
+						}
+					}
 				}
+				destroy_colony = yes
 			}
 		}
 	}
@@ -235,5 +210,22 @@ planet_event = {
 	immediate = {
 		remove_building = building_riftjump_town_main
 		remove_building = building_riftjump_city_main
+	}
+}
+
+country_event = {
+	id = riftjump_city.5
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_surviving_creeper = yes
+	}
+	immediate = {
+		add_resource = {
+			influence = -1000
+		}
+		add_resource = {
+			influence = 10
+		}
 	}
 }

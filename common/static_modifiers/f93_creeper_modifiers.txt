@@ -5,3 +5,7 @@ afg_demotion = {
 creeper_invasion_country = {
 	country_base_influence_produces_add = -15.0
 }
+
+surviving_creeper_modifier = {
+	custom_tooltip = surviving_creeper_modifier_effect
+}

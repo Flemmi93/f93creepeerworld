@@ -8,11 +8,19 @@ creeper_can_land = {
 		is_planet_class = pc_hive
 		is_planet_class = pc_machine
 	}
+	NOT = { has_planet_flag = creeper_present }
 }
 
 is_creeper = {
 	OR = {
 		army_type = creeper_army
 		army_type = creeper_spore
+	}
+}
+
+is_surviving_creeper = {
+	OR = {
+		has_country_flag = surviving_creeper_flag
+		has_modifier = surviving_creeper_modifier
 	}
 }

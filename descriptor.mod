@@ -5,4 +5,4 @@ tags={
 	"Gameplay"
 }
 name="Creeper World"
-supported_version="3.11.3"
+supported_version="3.12.*"

@@ -1,6 +1,6 @@
 namespace = f93creeper_world
 
-
+#set creeper effect
 planet_event = {
 	id = f93creeper_world.1
 	hide_window = yes
@@ -9,11 +9,11 @@ planet_event = {
 	immediate = {
 		set_planet_flag = creeper_present
 		set_planet_entity = {
-			entity = infected_planet_01_stage_2_entity
+			entity = creeper_world_infected_planet_entity
 		}
 	}
 }
-
+#remove creeper effect
 planet_event = {
 	id = f93creeper_world.2
 	hide_window = yes
@@ -49,15 +49,13 @@ planet_event = {
 }
 
 #seeds the Creeper
-country_event = { 
+country_event = {
 	id = f93creeper_world.3
 	hide_window = yes
 	is_triggered_only = yes
 	fire_only_once = yes
 
 	immediate = {
-		country_event = { id = f93creeper_world.7 days = 1}
-		every_country = { set_timed_country_flag = { flag = creeper_spread_phase days = 360 } }
 		random_system = {
 			limit = {
 				any_system_planet = { creeper_can_land = yes }
@@ -69,13 +67,39 @@ country_event = {
 					}
 				}
 			}
-			set_star_flag = creeper_present_in_system
-			random_system_planet = {
-				limit = { creeper_can_land = yes }
-				planet_event = { id = f93creeper_world.1 }
+		random_system_planet = {
+			create_country = {
+				name = "The Creeper"
+				adjective = "Creeper"
+				contact_rule = always
+				type = pirate
+				auto_delete = no
+				name_list = graygoo
+				flag = {
+					icon= {
+						category = "special"
+						file = "gray_goo.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "sinus.dds"
+					}
+					colors={
+						"blue"
+						"dark_blue"
+						"null"
+						"null"
+					}
+				}
+				effect = {
+					save_global_event_target_as = creeper_country
+				}
 			}
-			system_event = { id = f93creeper_world.4 days = 30 random = 30 } 
-			set_name = INFECTED #for test purpose, to see the change more easly
+			set_capital = yes
+		}
+			creeper_infects_system_effect = yes
+			every_country = { establish_communications_no_message = event_target:creeper_country }
+			every_country = { set_timed_country_flag = { flag = creeper_spread_phase days = 360 } }
 		}
 	}
 }
@@ -87,28 +111,18 @@ system_event = {
 
 	trigger = {
 		any_system_planet = {
-			NOT = { has_planet_flag = creeper_present }
 			creeper_can_land = yes
 		}
 	}
 	immediate = {
 		every_country = { set_timed_country_flag = { flag = creeper_spread_phase days = 360 } }
+		creeper_infects_system_effect = yes
 		closest_system = {
 			use_bypasses = no
 			min_steps = 1
-			max_steps = 2
+			max_steps = 3
 			limit = { NOT = { has_star_flag = creeper_present_in_system } any_system_planet = { creeper_can_land = yes } }
-			set_star_flag = creeper_present_in_system
-			system_event = { id = f93creeper_world.4 days = 180 random = 120 }
-			set_name = INFECTED #for test purpose, to see the change more easly
-		}
-		random_system_planet = {
-			limit = {
-				NOT = { has_planet_flag = creeper_present }
-				creeper_can_land = yes	
-			}
-			planet_event = { id = f93creeper_world.1 }
-			solar_system = { system_event = { id = f93creeper_world.4 days = 30 random = 30 } }
+			creeper_infects_system_effect = yes
 		}
 	}
 }
@@ -166,57 +180,19 @@ planet_event = {
 			create_army = {
 				name = "Creeper"
 				owner = event_target:creeper_country
-		#		species = event_target:creeper_species
 				type = creeper_army
 			}
 		}
 	}
 }
 
-country_event = {
-	id = f93creeper_world.7
-	hide_window = yes
-	is_triggered_only = yes
-	fire_only_once = yes
-	immediate = {
-		create_country = {
-			name = "The Creeper"
-			adjective = "Creeper"
-			contact_rule = always
-			type = gray_goo
-			auto_delete = no
-			name_list = graygoo
-			flag = {
-				icon= {
-					category = "special"
-					file = "gray_goo.dds"
-				}
-				background= {
-					category = "backgrounds"
-					file = "sinus.dds"
-				}
-				colors={
-					"blue"
-					"dark_blue"
-					"null"
-					"null"
-				}
-			}
-			effect = {
-				country_event = { id = f93creeper_world.3 }
-				save_global_event_target_as = creeper_country
-			}
-		}
-		every_country = { establish_communications_no_message = event_target:creeper_country }
-	}
-}
 
 country_event = {
 	id = f93creeper_world.8
 	hide_window = yes
 	is_triggered_only = yes
 	immediate = {
-		add_modifier = { modifier = creeper_invasion_country }
+		add_modifier = { modifier = surviving_creeper_modifier }
 		random_system_within_border = {
 			if = {
 				limit = { any_system_planet = { is_colony = yes } }

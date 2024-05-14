@@ -14,7 +14,7 @@ creeper_invasion_situation= {
 		}
 	}
 	on_abort = { destroy_situation = this }
-	on_progress_complete = { destroy_situation = this }
+	on_progress_complete = { destroy_situation = this custom_tooltip = creeper_flooded_the_world }
 	on_fail = {
 		destroy_situation = this
 		target = { planet_event = { id = riftjump_city.4 } }

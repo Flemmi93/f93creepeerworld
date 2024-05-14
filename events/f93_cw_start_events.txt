@@ -1,0 +1,27 @@
+namespace = f93_cw_start
+
+country_event = {
+	id = f93_cw_start.1
+	is_triggered_only = yes
+	title = f93_cw_start.1.name
+	desc = f93_cw_start.1.desc
+	picture = GFX_evt_dead_city
+	trigger = {
+		is_ai = no
+		count_owned_planet = {
+			count = all
+			is_occupied_flag = yes
+			has_planet_flag = creeper_present
+		}
+		NOT = { has_country_flag = old_man_gave_advice_flag }
+	}
+
+	immediate = { set_country_flag = old_man_gave_advice_flag }
+	option = {
+		name = f93_cw_start.1.a
+		give_technology = { tech = tech_riftjump_town message = yes }
+		capital_scope = {
+			add_building = building_riftjump_town_main
+		}
+	}
+}

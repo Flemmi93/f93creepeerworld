@@ -1,5 +1,5 @@
 particle={
-	name="infected_planet_stage_2_effect"
+	name="creeper_world_infected_effect"
 	subsystem={
 		name="clouds"
 		max_amount=150
