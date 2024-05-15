@@ -59,7 +59,7 @@ creeper_infects_system_effect = {
 	set_star_flag = creeper_present_in_system
 	# set_name = INFECTED #for test purpose, to see the change more easly
 	if = {
-		limit = { always = yes } # NOT = { exists = owner } }
+		limit = { exists = owner }
 		every_fleet_in_system = {
 			limit = { owner = { NOR = { is_gestalt = yes is_regular_empire = yes } } }
 			destroy_fleet = this
@@ -80,5 +80,120 @@ creeper_infects_system_effect = {
 		}
 		planet_event = { id = f93creeper_world.1 }
 		solar_system = { system_event = { id = f93creeper_world.4 days = 90 random = 90 } }
+	}
+}
+creeper_infects_system_effect_after_rift_jump = {
+	# set_name = INFECTED #for test purpose, to see the change more easly
+	create_starbase = {
+		owner = event_target:creeper_country
+		size = starbase_outpost
+	}
+	random_system_planet = {
+		limit = {
+			NOT = { has_planet_flag = creeper_present }
+			creeper_can_land = yes	
+		}
+		planet_event = { id = f93creeper_world.1 }
+		solar_system = { system_event = { id = f93creeper_world.4 days = 90 random = 90 } }
+	}
+}
+
+find_the_next_4_jump_targets = {
+	capital_scope.solar_system = { set_star_flag = current_jump_town_location }
+	capital_scope.solar_system = { save_event_target_as = current_jump_town_location }
+	random_system = {
+		limit = {
+			distance = {
+				source = event_target:current_jump_town_location
+				use_bypasses = no
+				min_jumps = 2
+				max_jumps = 6
+			}
+			has_star_flag = creeper_present_in_system
+			any_system_planet = {
+				is_colonizable = yes
+			}
+		}
+		save_event_target_as = jump_target_system_1
+		set_star_flag = jump_target_system_1
+	}
+	random_system = {
+		limit = {
+			distance = {
+				source = event_target:jump_target_system_1
+				use_bypasses = no
+				min_jumps = 2
+				max_jumps = 6
+			}
+			NOR = {
+				has_star_flag = jump_target_system_1
+				has_star_flag = riftjump_city_origin_system
+			}
+		}
+		save_event_target_as = jump_target_system_2
+		set_star_flag = jump_target_system_2
+	}
+	random_system = {
+		limit = {
+			distance = {
+				source = event_target:jump_target_system_2
+				use_bypasses = no
+				min_jumps = 2
+				max_jumps = 6
+			}
+			NOR = {
+				has_star_flag = jump_target_system_1
+				has_star_flag = jump_target_system_2
+				has_star_flag = riftjump_city_origin_system
+			}
+		}
+		save_event_target_as = jump_target_system_3
+		set_star_flag = jump_target_system_3
+	}
+	random_system = {
+		limit = {
+			distance = {
+				source = event_target:jump_target_system_3
+				use_bypasses = no
+				min_jumps = 2
+				max_jumps = 6
+			}
+			NOR = {
+				has_star_flag = jump_target_system_1
+				has_star_flag = jump_target_system_2
+				has_star_flag = jump_target_system_3
+				has_star_flag = riftjump_city_origin_system
+			}
+		}
+		save_event_target_as = jump_target_system_4
+		set_star_flag = jump_target_system_4
+	}
+	create_point_of_interest = {
+		id = jump_target_system_poi.1
+		name = "jump_target_system_1_poi"
+		desc = "jump_target_system_1_poi_desc"
+		event_chain = "creeper_survival_chain"
+		location = event_target:jump_target_system_1
+	}
+	create_point_of_interest = {
+		id = jump_target_system_poi.2
+		name = "jump_target_system_2_poi"
+		desc = "jump_target_system_1_poi_desc"
+		event_chain = "creeper_survival_chain"
+		location = event_target:jump_target_system_2
+	}
+	create_point_of_interest = {
+		id = jump_target_system_poi.3
+		name = "jump_target_system_3_poi"
+		desc = "jump_target_system_1_poi_desc"
+		event_chain = "creeper_survival_chain"
+		location = event_target:jump_target_system_3
+	}
+	create_point_of_interest = {
+		id = jump_target_system_poi.4
+		name = "jump_target_system_4_poi"
+		desc = "jump_target_system_1_poi_desc"
+		event_chain = "creeper_survival_chain"
+		location = event_target:jump_target_system_4
 	}
 }

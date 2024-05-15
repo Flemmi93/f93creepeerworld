@@ -67,36 +67,38 @@ country_event = {
 					}
 				}
 			}
-		random_system_planet = {
-			create_country = {
-				name = "The Creeper"
-				adjective = "Creeper"
-				contact_rule = always
-				type = pirate
-				auto_delete = no
-				name_list = graygoo
-				flag = {
-					icon= {
-						category = "special"
-						file = "gray_goo.dds"
+			every_fleet_in_system = { destroy_fleet = this }
+			set_star_flag = creeper_origin_system
+			random_system_planet = {
+				create_country = {
+					name = "The Creeper"
+					adjective = "Creeper"
+					contact_rule = always
+					type = pirate
+					auto_delete = no
+					name_list = graygoo
+					flag = {
+						icon= {
+							category = "special"
+							file = "gray_goo.dds"
+						}
+						background= {
+							category = "backgrounds"
+							file = "sinus.dds"
+						}
+						colors={
+							"blue"
+							"dark_blue"
+							"null"
+							"null"
+						}
 					}
-					background= {
-						category = "backgrounds"
-						file = "sinus.dds"
-					}
-					colors={
-						"blue"
-						"dark_blue"
-						"null"
-						"null"
+					effect = {
+						save_global_event_target_as = creeper_country
 					}
 				}
-				effect = {
-					save_global_event_target_as = creeper_country
-				}
+				set_capital = yes
 			}
-			set_capital = yes
-		}
 			creeper_infects_system_effect = yes
 			every_country = { establish_communications_no_message = event_target:creeper_country }
 			every_country = { set_timed_country_flag = { flag = creeper_spread_phase days = 360 } }

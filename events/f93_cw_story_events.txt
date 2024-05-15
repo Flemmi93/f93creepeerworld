@@ -1,0 +1,68 @@
+namespace = f93_cw_story
+
+country_event = {
+	id = f93_cw_story.1
+	is_triggered_only = yes
+	title = f93_cw_story.1.name
+	desc = f93_cw_story.1.desc
+	picture = GFX_evt_dead_city
+	trigger = {
+		is_ai = no
+		count_owned_planet = {
+			count = all
+			limit = { has_planet_flag = creeper_present }
+		}
+		NOT = { has_country_flag = old_man_gave_advice_flag }
+	}
+
+	immediate = {
+		set_country_flag = old_man_gave_advice_flag
+	}
+	option = {
+		name = f93_cw_story.1.a
+		begin_event_chain = { event_chain = creeper_survival_chain target = root }
+		give_technology = { tech = tech_riftjump_town message = yes }
+		capital_scope = {
+			add_building = building_riftjump_town_main
+		}
+	}
+	after = {
+		hidden_effect = {
+			every_country = { country_event = { id = f93_cw_story.2 days = 180 random = 720 } }
+			find_the_next_4_jump_targets = yes
+		}
+	}
+}
+
+country_event = {
+	id = f93_cw_story.2
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		is_ai = yes
+	}
+	immediate = {
+		random_owned_planet = {
+			while = {
+				count = 8
+				random_owned_pop = {
+					kill_pop = yes
+				}
+			}
+		}
+		country_event = { id = f93_cw_story.2 days = 5 days = 30 random = 180 }
+		every_country = { limit = { has_country_flag = old_man_gave_advice_flag } country_event = { id = f93_cw_story.3 } }
+	}
+}
+
+country_event = {
+	id = f93_cw_story.3
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		every_system = {	
+			set_surveyed = { surveyed = no surveyor = root }
+		}
+	}
+}
