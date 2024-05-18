@@ -101,7 +101,7 @@ building_riftjump_town_main = {
 		building_time_mult = -0.6
 		pop_housing_usage_mult = -0.5
 		planet_housing_add = 25
-		pop_environment_tolerance = 0.2
+		pop_environment_tolerance = 1
 	}
 	triggered_planet_modifier = {
 		potential = { num_unemployed > 10 }

@@ -24,3 +24,19 @@ is_surviving_creeper = {
 		has_modifier = surviving_creeper_modifier
 	}
 }
+
+f93_can_be_in_riftjump_lane = {
+	NOR = {
+		has_star_flag = jump_target_system_visited
+		has_star_flag = jump_target_system_1
+		has_star_flag = jump_target_system_2
+		has_star_flag = jump_target_system_3
+		has_star_flag = jump_target_system_4
+		has_star_flag = riftjump_city_origin_system
+	}
+	has_star_flag = creeper_present_in_system
+	any_system_planet = {
+		is_colonizable = yes
+	}
+
+}

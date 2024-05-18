@@ -16,17 +16,19 @@ country_event = {
 	}
 
 	immediate = {
+		set_country_flag = f93_original_country
 		set_country_flag = old_man_gave_advice_flag
+		solar_system = { set_star_flag = riftjump_city_origin_system }
 	}
 	option = {
 		name = f93_cw_story.1.a
-		begin_event_chain = { event_chain = creeper_survival_chain target = root }
 		give_technology = { tech = tech_riftjump_town message = yes }
 		capital_scope = {
 			add_building = building_riftjump_town_main
 		}
 	}
 	after = {
+		begin_event_chain = { event_chain = creeper_survival_chain target = root }
 		hidden_effect = {
 			every_country = { country_event = { id = f93_cw_story.2 days = 180 random = 720 } }
 			find_the_next_4_jump_targets = yes
@@ -63,6 +65,26 @@ country_event = {
 	immediate = {
 		every_system = {	
 			set_surveyed = { surveyed = no surveyor = root }
+		}
+	}
+}
+country_event = {
+	id = f93_cw_story.4
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		event_target:jump_target_system_1 = {	
+			set_surveyed = { surveyed = yes surveyor = root }
+		}
+		event_target:jump_target_system_2 = {	
+			set_surveyed = { surveyed = yes surveyor = root }
+		}
+		event_target:jump_target_system_3 = {	
+			set_surveyed = { surveyed = yes surveyor = root }
+		}
+		event_target:jump_target_system_4 = {	
+			set_surveyed = { surveyed = yes surveyor = root }
 		}
 	}
 }

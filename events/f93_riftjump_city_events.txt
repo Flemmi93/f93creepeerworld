@@ -18,7 +18,7 @@ planet_event = {
 	immediate = {
 		save_event_target_as = riftjump_origin
 		solar_system = { set_star_flag = riftjump_city_origin_system }
-		random_system = {
+		closest_system = {
 			limit = {
 				OR = {
 					has_star_flag = jump_target_system_1
@@ -55,86 +55,8 @@ planet_event = {
 
 	after = {
 		hidden_effect = {
-			if = {
-				limit = { exists = event_target:riftjump_target }
-				event_target:riftjump_target = {
-					if = {
-						limit = {
-							num_free_districts = {
-								type = any
-								value < 5
-							}
-						}
-						while = {
-							count = 4
-							random_deposit = { limit = { is_blocker = yes } clear_blocker = yes }
-						}
-						if = {
-							limit = {
-								num_free_districts = {
-									type = any
-									value < 5
-								}
-							}
-							add_deposit = random
-						}
-					}
-					create_colony = {
-						owner = root
-						species = root.owner_main_species
-						ethos = owner
-					}
-					solar_system = {
-						create_starbase = {
-							owner = root
-							size = starbase_starport
-							module = shipyard
-						}
-					}
-				}
-				#copy buildings
-				f93_cw_move_buildings_effect = yes
-				
-				owner = {
-					every_controlled_fleet = {
-						limit = {
-							OR = {
-								is_ship_class = shipclass_starbase
-								is_ship_size = mining_station
-								is_ship_size = research_station 
-							}
-							
-							NOT = { is_ship_size = juggernaut }
-							solar_system = {
-								has_star_flag = riftjump_city_origin_system
-							}
-						}
-						destroy_fleet = this
-					}
-					every_controlled_fleet = {
-						limit = {
-							solar_system = {
-								has_star_flag = riftjump_city_origin_system
-							}
-							NOR = { is_ship_size = mining_station is_ship_size = research_station }
-						}
-						set_location = event_target:riftjump_target
-					}
-					add_modifier = { modifier = afg_demotion days = 2 }
-				}
-				solar_system = { remove_star_flag = riftjump_city_origin_system }
-				while = {
-					count = 49
-					random_owned_pop = {
-						resettle_pop = {
-							pop = this
-							planet = event_target:riftjump_target
-						}
-					}
-				}
-				destroy_colony = yes
-				solar_system = { creeper_infects_system_effect_after_rift_jump = yes }
-			}
+			if = { limit = { owner = { has_country_flag = f93_original_country } } f93_first_riftjump_effect = yes }
+			else = { f93_riftjump_effect = yes }
 		}
 	}
 }

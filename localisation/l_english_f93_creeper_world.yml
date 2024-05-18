@@ -21,7 +21,7 @@
  building_riftjump_city_main_desc: "A vast collection of connected structures, able to skip the emptiness of space from planet to planet."
 #Decisions
  riftjump_decision: "$riftjump_city.1.name$"
- riftjump_decision_desc: "We activate the riftjump and leave §Y[Root.Planet.GetName]§! to places unknown"
+ riftjump_decision_desc: "We activate the riftjump and leave §Y[Planet.GetName]§! to places unknown"
 #Misc
  mod_job_angler_per_pop: "§G+1§! $job_angler$ Job per $VALUE$ Pops"
  mod_job_pearl_diver_per_pop: "§G+1§! $job_pearl_diver$ Job per $VALUE$ Pops"
@@ -43,13 +43,13 @@
  creeper_invasion_situation_type: "Creeper Level"
  creeper_invasion_situation_monthly_change_tooltip: "Creeper Level"
  creeper_invasion_situation_desc: "The $creeper$ is rising if it gets too high we have to leave §Y[target.GetName]§!."
- creeper_flooded_the_world: "The $creeper$ will flooded §Y[targer.GetName]§!"
+ creeper_flooded_the_world: "The $creeper$ will flooded §Y[target.GetName]§!"
 #Event Chain
  creeper_survival_chain_title: "Surviving the Creeper"
  creeper_survival_chain_desc: "§BThe Creeper!§!$NEW_LINE$ Thats what we call the horror that has befallen our galaxy.$NEW_LINE$$NEW_LINE$Nowhere was save. Everything is destroyed. Are we the last ones left?$NEW_LINE$$NEW_LINE$$NEW_LINE$§YKeeping our City alive§! and finding a way to §Ydefeat the Creeper§!, that is the hope, the mission: the old man has given us."
  lost_technologies_regained: "Technology Caches Found"
- jump_target_system_1_poi: "[jump_target_system_1.GetName]"
- jump_target_system_1_poi_desc: "The old coordinates are all we have to go by. Lets hope we find more before we run out."
- jump_target_system_2_poi: "[jump_target_system_2.GetName]"
- jump_target_system_3_poi: "[jump_target_system_3.GetName]"
- jump_target_system_4_poi: "[jump_target_system_4.GetName]"
+ jump_target_system_1_poi: "Location 1: [jump_target_system_1.GetName]"
+ jump_target_system_2_poi: "Location 2: [jump_target_system_2.GetName]"
+ jump_target_system_3_poi: "Location 3: [jump_target_system_3.GetName]"
+ jump_target_system_4_poi: "Location 4: [jump_target_system_4.GetName]"
+ jump_target_system_poi_desc: "The old coordinates are all we have to go by. Lets hope we find more before we run out."
