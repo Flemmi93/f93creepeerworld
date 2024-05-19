@@ -144,6 +144,45 @@ riftjump_decision = {
 		hidden_effect = { planet_event = { id = riftjump_city.1 } }
 	}
 }
+
+riftjump_location_decision = {
+	owned_planets_only = yes
+	icon = default
+	resources = {
+		category = decisions
+		cost = {
+			energy = 1000
+			#creeper_artifacts = 1
+		}
+	}
+	prerequisites = {
+		"tech_riftjump_town"
+	}
+
+	# enactment_time = 30
+
+	potential = {
+		owner = {
+			is_ai = no
+			OR = {
+				has_country_flag = creeper_spotted
+				has_country_flag = riftjump_city_created
+				has_technology = tech_riftjump_town
+			}
+		}
+	}
+
+	allow = {
+		OR = {
+			has_building = building_riftjump_town_main
+			has_building = building_riftjump_city_main
+		}
+	}
+
+	effect = {
+		hidden_effect = { planet_event = { id = f93_cw_story.5} }
+	}
+}
 riftjump_decision_ai = {
 	owned_planets_only = yes
 	icon = default

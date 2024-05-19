@@ -21,6 +21,7 @@
  building_riftjump_city_main_desc: "A vast collection of connected structures, able to skip the emptiness of space from planet to planet."
 #Decisions
  riftjump_decision: "$riftjump_city.1.name$"
+ riftjump_location_decision: "Jumplocation finder"
  riftjump_decision_desc: "We activate the riftjump and leave §Y[Planet.GetName]§! to places unknown"
 #Misc
  mod_job_angler_per_pop: "§G+1§! $job_angler$ Job per $VALUE$ Pops"

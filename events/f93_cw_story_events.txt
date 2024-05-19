@@ -88,3 +88,12 @@ country_event = {
 		}
 	}
 }
+country_event = {
+	id = f93_cw_story.5
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		find_the_next_4_jump_targets = yes
+	}
+}
