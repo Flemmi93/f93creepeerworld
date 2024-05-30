@@ -273,12 +273,13 @@ creeper_infects_system_effect = {
 			limit = { owner = { NOR = { is_gestalt = yes is_regular_empire = yes } } }
 			destroy_fleet = this
 		}
-		if = {
-			limit = { exists = event_target:creeper_country }
-			create_starbase = {
-				owner = event_target:creeper_country
-				size = starbase_outpost
-			}
+	}
+	
+	if = {
+		limit = { exists = event_target:creeper_country }
+		create_starbase = {
+			owner = event_target:creeper_country
+			size = starbase_outpost
 		}
 	}
 	

@@ -1,6 +1,5 @@
 on_game_start_country = {
 	events = {
-		f93creeper_world.3 # can be caused at any point in game time. 
 	}
 }
 
@@ -12,8 +11,11 @@ on_bi_yearly_pulse_country = {
 }
 on_monthly_pulse_country = {
 	events = {
-		f93creeper_world.5
-		f93creeper_world.8
+		f93creeper_spread.1
+		f93creeper_spread.3
+		# f93creeper_world.3 # can be caused at any point in game time. 
+		# f93creeper_world.5
+		# f93creeper_world.8
 		f93_cw_story.1
 		riftjump_city.5 # disabled influence
 	}

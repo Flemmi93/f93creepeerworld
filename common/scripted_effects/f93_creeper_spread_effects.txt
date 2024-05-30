@@ -1,0 +1,56 @@
+
+creeper_spreads_system_effect = {
+	# set_name = INFECTED #for test purpose, to see the change more easly
+	if = {
+		limit = { NOT = { has_star_flag = creeper_present_in_system } }
+		set_star_flag = creeper_present_in_system
+		every_fleet_in_system = {
+			limit = { owner = { NOR = { is_gestalt = yes is_regular_empire = yes } } }
+			destroy_fleet = this
+		}
+	}
+	
+	if = {
+		limit = { exists = event_target:creeper_country }
+		create_starbase = {
+			size = starbase_outpost
+			owner = event_target:creeper_country
+		}
+		system_event = { id = f93creeper_spread.2 days = 30 random = 60 }
+	}
+}
+
+creeper_spreads_planet_effect = {
+		set_planet_flag = creeper_present
+		set_planet_entity = {
+			entity = creeper_world_infected_planet_entity
+			picture = pc_nuked
+		}
+	}
+creeper_removed_planet_effect = {
+	remove_planet_flag = creeper_present
+	switch = {
+		trigger = is_planet_class
+		pc_savannah = { set_planet_entity = { entity = pc_savannah } }
+		pc_desert = { set_planet_entity = { entity = pc_desert } }
+		pc_tropical = { set_planet_entity = { entity = pc_tropical } }
+		pc_arid = { set_planet_entity = { entity = pc_arid } }
+		pc_continental = { set_planet_entity = { entity = pc_continental } }
+		pc_ocean = { set_planet_entity = { entity = pc_ocean } }
+		pc_tundra = { set_planet_entity = { entity = pc_tundra } }
+		pc_arctic = { set_planet_entity = { entity = pc_arctic } }
+		pc_alpine = { set_planet_entity = { entity = pc_alpine } }
+		pc_savannah = { set_planet_entity = { entity = pc_savannah } }
+		pc_gaia = { set_planet_entity = { entity = pc_gaia } }
+		pc_city = { set_planet_entity = { entity = pc_city } }
+		pc_relic = { set_planet_entity = { entity = pc_relic } }
+		pc_nuked = { set_planet_entity = { entity = pc_nuked } }
+		pc_hive = { set_planet_entity = { entity = pc_hive } }
+		pc_machine = { set_planet_entity = { entity = pc_machine } }
+		pc_molten = { set_planet_entity = { entity = molten_planet } }
+		pc_barren = { set_planet_entity = { entity = barren_planet } }
+		pc_barren_cold = { set_planet_entity = { entity = cold_barren_planet } }
+		pc_toxic = { set_planet_entity = { entity = toxic_planet } }
+		pc_frozen = { set_planet_entity = { entity = frozen_planet } }
+	}
+}

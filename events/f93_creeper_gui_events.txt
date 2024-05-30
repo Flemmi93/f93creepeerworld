@@ -1,0 +1,9 @@
+namespace = f93_creeper_gui
+
+country_event = {
+	id = f93_creeper_gui.1
+	is_triggered_only = yes
+	hide_window = yes
+	diplomatic = yes
+	custom_gui = creeper_invasion_country_window
+}

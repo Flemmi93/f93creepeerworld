@@ -67,6 +67,7 @@ country_event = {
 					}
 				}
 			}
+			# set_name = BLOOB
 			every_fleet_in_system = { destroy_fleet = this }
 			set_star_flag = creeper_origin_system
 			random_system_planet = {
@@ -156,7 +157,7 @@ planet_event = {
 		is_occupied_flag = no
 	}
 	trigger = {
-		has_planet_flag = creeper_present
+		has_planet_flag = creeper_present_in_system
 	}
 	immediate = {
 		every_country = { establish_communications_no_message = root.owner }
@@ -193,9 +194,17 @@ country_event = {
 	id = f93creeper_world.8
 	hide_window = yes
 	is_triggered_only = yes
+	trigger = {
+		any_system_within_border = {
+			any_neighbor_system = {
+				has_star_flag = creeper_present
+			}
+		}
+	}
 	immediate = {
 		add_modifier = { modifier = surviving_creeper_modifier }
 		random_system_within_border = {
+			limit = { has_star_flag = creeper_present }
 			if = {
 				limit = { any_system_planet = { is_colony = yes } }
 				every_system_planet = {

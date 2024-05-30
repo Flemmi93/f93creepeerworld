@@ -1,0 +1,125 @@
+namespace = f93creeper_spread
+
+country_event = {
+	id = f93creeper_spread.1
+	is_triggered_only = yes
+	hide_window = yes
+	fire_only_once = yes
+
+	immediate = {
+		random_system = {
+			limit = {
+				any_system_planet = { creeper_can_land = yes }
+				NOR = {
+					any_system_planet = { is_homeworld = yes }
+					has_owner = yes
+					has_star_flag = sealed_system
+					any_neighbor_system = {
+						any_system_planet = { is_homeworld = yes }
+						has_owner = yes
+					}
+				}
+				
+				distance  = {
+					type = euclidean
+					source = root.capital_scope.solar_system
+					min_distance >= 200
+				}
+			}
+			# set_name = BLOOB
+			every_fleet_in_system = { destroy_fleet = this }
+			set_star_flag = creeper_origin_system
+			random_system_planet = {
+				create_country = {
+					name = "The Creeper"
+					adjective = "Creeper"
+					contact_rule = always
+					type = pirate
+					auto_delete = no
+					name_list = graygoo
+					flag = {
+						icon= {
+							category = "special"
+							file = "gray_goo.dds"
+						}
+						background= {
+							category = "backgrounds"
+							file = "sinus.dds"
+						}
+						colors={
+							"blue"
+							"dark_blue"
+							"null"
+							"null"
+						}
+					}
+					effect = {
+						save_global_event_target_as = creeper_country
+						set_country_flag = f93_is_the_creeper
+						country_event = { id = f93creeper_spread.3 days = 1 }
+					}
+				}
+				set_capital = yes
+				creeper_spreads_planet_effect = yes
+				# change_pc = pc_nuked
+				# create_colony = {
+				# 	owner = last_created_country
+				# 	# species = owner_main_species
+				# 	ethos = { ethic = ethic_fanatic_xenophobe }
+				# }
+			}
+			creeper_spreads_system_effect = yes
+			every_country = { establish_communications_no_message = event_target:creeper_country }
+		}
+	}
+}
+
+system_event = {
+	id = f93creeper_spread.2
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		any_system_planet = {
+			creeper_can_land = yes
+		}
+	}
+	immediate = {
+		random_system_planet = {
+			limit = {
+				NOT = { has_planet_flag = creeper_present }
+				creeper_can_land = yes	
+			}
+			creeper_spreads_planet_effect = yes
+		}
+		system_event = { id = f93creeper_spread.2 days = 30 random = 60 }
+	}
+}
+country_event = {
+	id = f93creeper_spread.3
+	is_triggered_only = yes
+	hide_window = yes
+	trigger = {
+		has_country_flag = f93_is_the_creeper
+	}
+	immediate = {
+		capital_scope.solar_system = {
+			closest_system = {
+				limit = {
+					NOT = { has_star_flag = creeper_present_in_system }
+					has_owner = no
+					any_system_planet = {
+						is_homeworld = no
+					}
+					any_neighbor_system = {
+						any_system_planet = {
+							is_homeworld = no
+						}
+					}
+				}
+				creeper_spreads_system_effect = yes
+				root = { country_event = { id = f93creeper_spread.3 days = 10 random = 20 } }
+				root = { country_event = { id = f93creeper_spread.3 days = 360 random = 29 } }
+			}
+		}
+	}
+}
